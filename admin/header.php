@@ -102,14 +102,14 @@ $fn = new custom_functions;
 						<a href="#" class="logo">
 							<img src="img/logo.svg" alt="Uni Pro Admin">
 						</a>
-						<a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#tab-home" role="tab" aria-controls="tab-home" aria-selected="true">
+						<a class="nav-link" id="home-tab" data-bs-toggle="tab" href="#tab-home" role="tab" aria-controls="tab-home" aria-selected="true">
 							<i class="icon-home2"></i>
 							<span class="nav-link-text">Dashboards</span>
 						</a>
-						<!-- <a class="nav-link " id="product-tab" data-bs-toggle="tab" href="#tab-product" role="tab" aria-controls="tab-product" aria-selected="false">
+						<a class="nav-link " id="product-tab" data-bs-toggle="tab" href="#tab-product" role="tab" aria-controls="tab-product" aria-selected="false">
 							<i class="icon-layers2"></i>
 							<span class="nav-link-text">Cities</span>
-						</a> -->
+						</a>
 						
 					</div>
 					<!-- Tabs nav end -->
@@ -159,16 +159,16 @@ $fn = new custom_functions;
 						</div>
 
 						<!-- Pages tab -->
-						<!-- <div class="tab-pane fade show" id="tab-product" role="tabpanel" aria-labelledby="product-tab"> -->
+						<div class="tab-pane fade show" id="tab-product" role="tabpanel" aria-labelledby="product-tab">
 							
 							<!-- Tab content header start -->
-							<!-- <div class="tab-pane-header">
+							<div class="tab-pane-header">
 								Product
-							</div> -->
+							</div>
 							<!-- Tab content header end -->
 
 							<!-- Sidebar menu starts -->
-							<!-- <div class="sidebarMenuScroll">
+							<div class="sidebarMenuScroll">
 								<div class="sidebar-menu">
 									<ul>
 										<li>
@@ -189,11 +189,11 @@ $fn = new custom_functions;
 									</ul>
 									
 								</div>
-							</div> -->
-							<!-- Sidebar menu ends -->	
-<!-- 							
-						</div> -->
-						<!---pages tab end-->
+							</div>
+							<!-- Sidebar menu ends -->
+
+							
+						</div>
 
 					
 
