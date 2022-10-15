@@ -1,3 +1,15 @@
+<?php
+include_once('admin/includes/functions.php');
+$function = new functions;
+include_once('admin/includes/custom-functions.php');
+$fn = new custom_functions;
+include_once('admin/includes/crud.php');
+$db = new Database();
+$db->connect();
+$db->sql("SET NAMES 'utf8'");
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -187,7 +199,7 @@
     </div>
 	<div class="container">
     	<nav class="navbar navbar-expand-lg"> 
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index.php">
                 <h2 class="mb-0">KAALGYAAN</h2>
                 <!-- <img class="logo_light" src="assets/images/logo_white.png" alt="logo" />
                 <img class="logo_dark" src="assets/images/logo_dark.png" alt="logo" /> -->
@@ -196,14 +208,14 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li>
-                        <a  class="nav-link  active" href="index.html">Home</a>
+                        <a  class="nav-link  active" href="index.php">Home</a>
                     </li>
                     <li>
                         <a  class="nav-link " href="#">About</a>
                     </li>  <li>
                         <a  class="nav-link " href="#">Gallery</a>
                     </li>
-                 <li><a class="nav-link nav_item" href="contact.html">Contact</a></li>
+                 <li><a class="nav-link nav_item" href="contact.php">Contact</a></li>
                 </ul>
             </div>
             <ul class="navbar-nav attr-nav align-items-center">
@@ -212,7 +224,7 @@
                         <span class="close-search"><i class="ion-ios-close-empty"></i></span>
                         <form>
                             <input type="text" placeholder="Search" class="form-control" id="search_input">
-                            <a href="searchpage.html" type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></a>
+                            <a href="" type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></a>
                         </form>
                     </div>
                 </li>
@@ -229,132 +241,112 @@
         	<div class="col-xl-6 order-xl-2">
             	<div class="post_center_item">
                     <div class="carousel_slider owl-carousel owl-theme nav_style1" data-loop="true" data-autoplay="true" data-animate-in="fadeIn" data-animate-out="fadeOut" data-autoplay-timeout="4000" data-items="1" data-dots="false" data-nav="true">
-                        <div class="item active background_bg" data-img-src="assets/images/kal/image1.jpeg">
+                            <?php
+                                    $sql = "SELECT *,categories.name AS name FROM `homebanners`,`categories` WHERE homebanners.category_id=categories.id";
+                                    $db->sql($sql);
+                                    $result = $db->getResult();
+                                    foreach ($result as $value) {
+                                    ?>
+                        <div class="item active background_bg" data-img-src="<?php echo "admin/" .$value['image']; ?>">
                             <div class="banner_slide_content_bottom">
                                 <div class="banner_content">
                                     <div class="blog_tags">
-                                    	<a class="blog_tags_cat bg_light_green" href="#">Theatres</a>
+                                    	<a class="blog_tags_cat bg_light_green" href="#"><?php echo $value['name'] ?></a>
                                     </div>
-                                    <h2 class="blog_heading"><a href="#">Which Of Us Ever Undertakes Laborious Physical Exercise</a></h2>
+                                    <h2 class="blog_heading"><a href="#"><?php echo $value['title'] ?></a></h2>
                                    
                                 </div>
                             </div>
                         </div>
-                        <div class="item background_bg" data-img-src="assets/images/kal/image2.jpeg">
-                            <div class="banner_slide_content_bottom">
-                                <div class="banner_content">
-                                    <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_purple" href="#">Anganvadi</a>
-                                    </div>
-                                    <h2 class="blog_heading"><a href="#">The Sanford Stadium project consists of three main areas</a></h2>
-                                   
-                                </div>
-                            </div>
-                        </div>
+                    <?php } ?>
                     </div>
                 </div>
             </div>
         	<div class="col-xl-3 col-sm-6 order-xl-1">
             	<div class="post_first_item">
             		<div class="carousel_slider owl-carousel owl-theme nav_style1" data-loop="true" data-autoplay="true" data-autoplay-timeout="5000" data-items="1" data-dots="false" data-nav="true">
-                        <div class="item active background_bg" data-img-src="assets/images/kal/image3.jpeg">
+                       <?php
+                                    $sql = "SELECT *,categories.name AS name FROM `homebanners`,`categories` WHERE homebanners.category_id=categories.id";
+                                    $db->sql($sql);
+                                    $result = $db->getResult();
+                                    foreach ($result as $value) {
+                                    ?>
+                        <div class="item active background_bg" data-img-src="<?php echo "admin/" .$value['image']; ?>">
                             <div class="banner_slide_content_bottom">
                                 <div class="banner_content">
                                     <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_blue" href="#">Schools</a>
+                                        <a class="blog_tags_cat bg_blue" href="#"><?php echo $value['name'] ?></a>
                                     </div>
-                                    <h5 class="blog_heading"><a href="#">We Denounce With Righteous Indignation And Dislike</a></h5>
+                                    <h5 class="blog_heading"><a href="#"><?php echo $value['title'] ?></a></h5>
                                    
                                 </div>
                             </div>
                         </div>
-                        <div class="item background_bg" data-img-src="assets/images/blog_img13.jpg">
-                            <div class="banner_slide_content_bottom">
-                                <div class="banner_content">
-                                    <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_warning" href="#">Office</a>
-                                    </div>
-                                    <h5 class="blog_heading"><a href="#">Which Is The Same As Saying Through Shrinking From Toil</a></h5>
-                                   
-                                </div>
-                            </div>
-                        </div>
+                    <?php } ?>
                     </div>
-                	<div class="carousel_slider owl-carousel owl-theme nav_style1" data-loop="true" data-autoplay="true" data-autoplay-timeout="4000" data-items="1" data-dots="false" data-nav="true">
-                        <div class="item active background_bg" data-img-src="assets/images/kal/image6.jpg">
+                    <div class="carousel_slider owl-carousel owl-theme nav_style1" data-loop="true" data-autoplay="true" data-autoplay-timeout="5000" data-items="1" data-dots="false" data-nav="true">
+                       <?php
+                                    $sql = "SELECT *,categories.name AS name FROM `homebanners`,`categories` WHERE homebanners.category_id=categories.id";
+                                    $db->sql($sql);
+                                    $result = $db->getResult();
+                                    foreach ($result as $value) {
+                                    ?>
+                        <div class="item  background_bg" data-img-src="<?php echo "admin/" .$value['image']; ?>">
                             <div class="banner_slide_content_bottom">
                                 <div class="banner_content">
                                     <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_danger" href="#">Temples</a>
+                                        <a class="blog_tags_cat bg_warning" href="#"><?php echo $value['name'] ?></a>
                                     </div>
-                                    <h5 class="blog_heading"><a href="#">Every Pleasure Is To Be Welcomed And Every Pain</a></h5>
+                                    <h5 class="blog_heading"><a href="#"><?php echo $value['title'] ?></a></h5>
                                    
                                 </div>
                             </div>
                         </div>
-                        <div class="item background_bg" data-img-src="assets/images/kal/image7.jpeg">
-                            <div class="banner_slide_content_bottom">
-                                <div class="banner_content">
-                                    <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_success" href="#">Panchayat Secretary </a>
-                                    </div>
-                                    <h5 class="blog_heading"><a href="#">But In Certain Circumstances And Owing To The Claims</a></h5>
-                                   
-                                </div>
-                            </div>
-                        </div>
+                    <?php } ?>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 order-xl-3">
             	<div class="post_last_item">
             		<div class="carousel_slider owl-carousel owl-theme nav_style1" data-loop="true" data-autoplay="true" data-autoplay-timeout="4500" data-items="1" data-dots="false" data-nav="true">
-                        <div class="item active background_bg" data-img-src="assets/images/kal/image5.jpeg">
+                        <?php
+                                    $sql = "SELECT *,categories.name AS name FROM `homebanners`,`categories` WHERE homebanners.category_id=categories.id";
+                                    $db->sql($sql);
+                                    $result = $db->getResult();
+                                    foreach ($result as $value) {
+                                    ?>
+                        <div class="item active background_bg" data-img-src="<?php echo "admin/" .$value['image']; ?>">
                             <div class="banner_slide_content_bottom">
                                 <div class="banner_content">
                                     <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_success" href="#">Theatres</a>
+                                        <a class="blog_tags_cat bg_success" href="#"><?php echo $value['name']; ?></a>
                                     </div>
-                                    <h5 class="blog_heading"><a href="#">This Mistaken Idea Of Denouncing Pleasure</a></h5>
+                                    <h5 class="blog_heading"><a href="#"><?php echo $value['title']; ?></a></h5>
                                    
                                 </div>
                             </div>
                         </div>
-                        <div class="item background_bg" data-img-src="assets/images/kal/image10.jpeg">
-                            <div class="banner_slide_content_bottom">
-                                <div class="banner_content">
-                                    <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_danger" href="#">Schools</a>
-                                    </div>
-                                    <h5 class="blog_heading"><a href="#">I Will Give You A Complete Account Of The System</a></h5>
-                                   
-                                </div>
-                            </div>
-                        </div>
+                    <?php } ?>
                     </div>
-                	<div class="carousel_slider owl-carousel owl-theme nav_style1" data-loop="true" data-autoplay="true" data-items="1" data-autoplay-timeout="5500" data-dots="false" data-nav="true">
-                        <div class="item active background_bg" data-img-src="assets/images/kal/image8.jpg">
+                    <div class="carousel_slider owl-carousel owl-theme nav_style1" data-loop="true" data-autoplay="true" data-autoplay-timeout="4500" data-items="1" data-dots="false" data-nav="true">
+                        <?php
+                                    $sql = "SELECT *,categories.name AS name FROM `homebanners`,`categories` WHERE homebanners.category_id=categories.id";
+                                    $db->sql($sql);
+                                    $result = $db->getResult();
+                                    foreach ($result as $value) {
+                                    ?>
+                        <div class="item background_bg" data-img-src="<?php echo "admin/" .$value['image']; ?>">
                             <div class="banner_slide_content_bottom">
                                 <div class="banner_content">
                                     <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_warning" href="#">Masjid</a>
+                                        <a class="blog_tags_cat bg_danger" href="#"><?php echo $value['name']; ?></a>
                                     </div>
-                                    <h5 class="blog_heading"><a href="#">Expound The Actual Teachings Of The Great Explorer</a></h5>
+                                    <h5 class="blog_heading"><a href="#"><?php echo $value['title']; ?></a></h5>
                                    
                                 </div>
                             </div>
                         </div>
-                        <div class="item background_bg" data-img-src="assets/images/kal/image9.jpg">
-                            <div class="banner_slide_content_bottom">
-                                <div class="banner_content">
-                                    <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_blue" href="#">Church</a>
-                                    </div>
-                                    <h5 class="blog_heading"><a href="#">How To Pursue Pleasure Rationally Encounter</a></h5>
-                                   
-                                </div>
-                            </div>
-                        </div>
+                    <?php } ?>
                     </div>
                 </div>
             </div>
@@ -376,114 +368,31 @@
         <div class="row">
         	<div class="col-12">
             	<div class="carousel_slider owl-carousel owl-theme nav_style2" data-margin="30" data-loop="true" data-dots="false" data-nav="true" data-responsive='{"0":{"items": "1"}, "480":{"items": "2"}, "991":{"items": "3"}, "1199":{"items": "4"}}'>
+                <?php
+                        $sql = "SELECT *,categories.name AS name FROM `hometrending_posts`,`categories` WHERE hometrending_posts.category_id=categories.id";
+                        $db->sql($sql);
+                        $result = $db->getResult();
+                        foreach ($result as $value) {
+                        ?>
                     <div class="item">
                         <div class="blog_post">
                             <div class="blog_img">
                                 <a href="#">
-                                    <img src="assets/images/kal/hotel/taj.jpg" alt="tranding_post_img">
+                                    <img src="<?php echo "admin/" .$value['image']; ?>" alt="tranding_post_img">
                                 </a>
                             </div>
                             <div class="blog_content">
                                 <div class="blog_text">
                                     <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_blue" href="#">Hotels</a>
+                                        <a class="blog_tags_cat bg_blue" href="#"><?php echo $value['name'] ?></a>
                                     </div>
-                                    <h5 class="blog_heading"><a href="#">Taj Krishna, Hyderabad</a></h5>
-                                    <p> Treat your eyes to a panoramic view of this beautiful city and the calm of the Hussain Sagar Lake. </p>
+                                    <h5 class="blog_heading"><a href="#"><?php echo $value['title'] ?></a></h5>
+                                    <p> <?php echo $value['description'] ?> </p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="blog_post">
-                            <div class="blog_img">
-                                <a href="#">
-                                    <img src="assets/images/kal/rentals/srr.jpg" alt="tranding_post_img">
-                                </a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="blog_text">
-                                    <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_warning" href="#">Holiday Rentals</a>
-                                    </div>
-                                    <h5 class="blog_heading"><a href="#">SRR Homes</a></h5>
-                                    <p>Villa designed exclusively for corporate housing and business travelers. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="blog_post">
-                            <div class="blog_img">
-                                <a href="#">
-                                    <img src="assets/images/kal/image4.jpg" alt="tranding_post_img">
-                                </a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="blog_text">
-                                    <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_danger" href="#">Temples</a>
-                                    </div>
-                                    <h5 class="blog_heading"><a href="#">Shree Jagannath Temple</a></h5>
-                                    <p>The temple is an architectural delight and is a destination to experience peace and tranquility. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="blog_post">
-                            <div class="blog_img">
-                                <a href="#">
-                                    <img src="assets/images/kal/restr/bawarchi.jpg" alt="tranding_post_img">
-                                </a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="blog_text">
-                                    <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_warning" href="#">Restaurants</a>
-                                    </div>
-                                    <h5 class="blog_heading"><a href="#">Bawarchi </a></h5>
-                                    <p>Local cuisine, Indian, Asian, Vegetarian Friendly, Halal</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="blog_post">
-                            <div class="blog_img">
-                                <a href="#">
-                                    <img src="assets/images/kal/theatre/prasads-imax.jpg" alt="tranding_post_img">
-                                </a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="blog_text">
-                                    <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_success" href="#">Theatres</a>
-                                    </div>
-                                    <h5 class="blog_heading"><a href="#">Prasads Multiplex</a></h5>
-                                    <p>It's a great place for hanging out with friends or with the family member</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="blog_post">
-                            <div class="blog_img">
-                                <a href="#">
-                                    <img src="assets/images/kal/shopping/forum-sujana-mall3.jpg" alt="tranding_post_img">
-                                </a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="blog_text">
-                                    <div class="blog_tags">
-                                        <a class="blog_tags_cat bg_purple" href="#">Shopping</a>
-                                    </div>
-                                    <h5 class="blog_heading"><a href="#">The Forum Sujana Mall</a></h5>
-                                    <p>It was good mall,no dowt. So many international brands Shop.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </div>     
+                <?php } ?>     
                 </div>
             </div>
         </div>
@@ -503,94 +412,59 @@
     	<div class="row">
         	<div class="col-lg-8">
             	<div class="blog_article blog_grid_module">
+                <?php
+                        $sql = "SELECT *,categories.name AS name FROM `homefeatured_posts`,`categories` WHERE homefeatured_posts.category_id=categories.id";
+                        $db->sql($sql);
+                        $res = $db->getResult();
+                        ?>
                 	<div class="blog_post">
                         <div class="blog_img">
                             <a href="#">
-                            	<img src="assets/images/kal/schools/1.jpg" alt="blog_img1">
+                            	<img src="<?php echo "admin/" .$res[0]['image']; ?>" alt="blog_img1">
                             </a>
                         </div>
                         <div class="blog_content">
                         	<div class="blog_text">
                         		<div class="blog_tags">
-                                    <a class="blog_tags_cat bg_blue" href="#">Schools</a>
+                                    <a class="blog_tags_cat bg_blue" href="#"><?php echo $res[0]['name']; ?></a>
                                 </div>
-                        		<h5 class="blog_heading"><a href="#">The Shri Ram Universal School</a></h5>
+                        		<h5 class="blog_heading"><a href="#"><?php echo $res[0]['title']; ?></a></h5>
                                
-                        		<p>Focusing on child-centric education, Shri Ram Universal School is one of the most sought-after academic institutions.</p>
+                        		<p><?php echo $res[0]['description']; ?></p>
                         	</div>
                         </div>
                     </div>
+                    <?php
+                                    $sql = "SELECT *,categories.name AS name FROM `homefeatured_posts`,`categories` WHERE homefeatured_posts.category_id=categories.id";
+                                    $db->sql($sql);
+                                    $result = $db->getResult();
+                                    foreach ($result as $value) {
+                                    ?>
                     <div class="blog_post">
                         <div class="blog_img">
                             <a href="#">
-                            	<img src="assets/images/kal/shopping/2.jpg" alt="blog_img2">
+                            	<img src="<?php echo "admin/" .$value['image']; ?>" alt="blog_img2">
                                 <!-- <div class="post_video_icon"><i class="fas fa-play"></i></div> -->
                             </a>
                         </div>
                         <div class="blog_content">
                         	<div class="blog_text">
                         		<div class="blog_tags">
-                                    <a class="blog_tags_cat bg_warning" href="#">Shopping</a>
+                                    <?php
+                                $colors = ['<a class="blog_tags_cat bg_warning" href="#">', '<a class="blog_tags_cat bg_danger" href="#">
+                                ', '<a class="blog_tags_cat bg_success" href="#">','<a class="blog_tags_cat bg_purple" href="#">'];
+
+                                     ?>    <?php echo $colors[rand(0,3)].$value['name'];?>
+                                
+                                  </a>
                                 </div>
-                        		<h5 class="blog_heading"><a href="#">Magic found in buying something.</a></h5>
+                        		<h5 class="blog_heading"><a href="#"><?php echo $value['title']; ?></a></h5>
                                
-                        		<p>Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this generator on the Internet.</p>
+                        		<p><?php $value['description']; ?></p>
                         	</div>
                         </div>
                     </div>
-                    <div class="blog_post">
-                        <div class="blog_img">
-                            <a href="#">
-                            	<img src="assets/images/kal/templ/sanghi-temple.jpg" alt="blog_img3">
-                            </a>
-                        </div>
-                        <div class="blog_content">
-                        	<div class="blog_text">
-                        		<div class="blog_tags">
-                                    <a class="blog_tags_cat bg_danger" href="#">Temples</a>
-                                </div>
-                        		<h5 class="blog_heading"><a href="#">Temple is a good place for meditating and travelling</a></h5>
-                               
-                        		<p>Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this generator on the Internet.</p>
-                        	</div>
-                        </div>
-                    </div>
-                    <div class="blog_post">
-                        <div class="blog_img">
-                            <a href="#">
-                            	<img src="assets/images/kal/theatre/1.jpg" alt="blog_img4">
-                                <div class="post_video_icon"><i class="fas fa-play"></i></div>
-                            </a>
-                        </div>
-                        <div class="blog_content">
-                        	<div class="blog_text">
-                        		<div class="blog_tags">
-                                    <a class="blog_tags_cat bg_success" href="#">Theatres</a>
-                                </div>
-                        		<h5 class="blog_heading"><a href="#">Watching movie stars under the stars.</a></h5>
-                               
-                        		<p>Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this generator on the Internet.</p>
-                        	</div>
-                        </div>
-                    </div>
-                    <div class="blog_post">
-                        <div class="blog_img">
-                            <a href="#">
-                            	<img src="assets/images/kal/places/1.jpg" alt="blog_img5">
-                            </a>
-                        </div>
-                        <div class="blog_content">
-                        	<div class="blog_text">
-                        		<div class="blog_tags">
-                                    <a class="blog_tags_cat bg_purple" href="#">Places</a>
-                                </div>
-                        		<h5 class="blog_heading"><a href="#">Take only memories, leave only footprints</a></h5>
-                               
-                        		<p>Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this generator on the Internet.</p>
-                        	</div>
-                        </div>
-                    </div>
-              
+                    <?php } ?>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -605,11 +479,23 @@
                     <div class="widget">
                     	<h5 class="widget_title">Categories</h5>
                         <ul class="widget_categories">
-                        	<li><a href="#"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img1.jpg"><div class="post_category"><span class="cat_title">Church</span><span class="cat_num">2 Post</span></div></div></a></li>
-                            <li><a href="#"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img2.jpg"><div class="post_category"><span class="cat_title">Temples</span><span class="cat_num">5 Post</span></div></div></a></li>
-                            <li><a href="#"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img3.jpg"><div class="post_category"><span class="cat_title">Hotels</span><span class="cat_num">7 Post</span></div></div></a></li>
-                            <li><a href="#"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img4.jpg"><div class="post_category"><span class="cat_title">Schools</span><span class="cat_num">4 Post</span></div></div></a></li>
-                            <li><a href="#"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img5.jpg"><div class="post_category"><span class="cat_title">Theatres</span><span class="cat_num">8 Post</span></div></div></a></li>
+                        <?php
+                        $sql = "SELECT * FROM `categories`";
+                        $db->sql($sql);
+                        $result = $db->getResult();
+                        foreach ($result as $value) {
+                        ?>
+                        	<li><a href="#<?php $value['id']; ?>"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img1.jpg"><div class="post_category"><span class="cat_title"><?php echo $value['name'] ?></span><span 
+                                    class="cat_num" id=<?php echo $value['id']; ?>> <?php
+                        $sql = "SELECT * FROM `homefeatured_posts` WHERE category_id= $value[id]";
+                        $db->sql($sql);
+                        $result = $db->getResult();
+                        $num = $db->numRows($result);
+                        foreach ($result as $value) { 
+                            echo $num;
+                        }
+                        ?> Post</span></div></div></a></li>
+                            <?php } ?>  
                         </ul>
                     </div>
                     <!-- <div class="widget">
@@ -649,21 +535,16 @@
                 	<h4>Gallery</h4>
                 </div>
             </div>
+            <?php
+                        $sql = "SELECT * FROM `homegallery`";
+                        $db->sql($sql);
+                        $result = $db->getResult();
+                        foreach ($result as $value) {
+                        ?>
             <div class="col-lg-4">
-                <img src="assets/images/kal/hotel/taj.jpg" alt="" class="img-fluid">
-                <img src="assets/images/kal/shopping/2.jpg" alt="" class="img-fluid">
-                <img src="assets/images/kal/schools/1.jpg" alt="" class="img-fluid">
+                <img src="<?php echo "admin/" .$value['image']; ?>" alt="" class="img-fluid">
             </div>
-            <div class="col-lg-4">
-               
-                <img src="assets/images/kal/shopping/2.jpg" alt="" class="img-fluid">
-                <img src="assets/images/kal/theatre/1.jpg" alt="" class="img-fluid">
-                <img src="assets/images/kal/theatre/prasads-imax.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="col-lg-4">
-                <img src="assets/images/kal/places/1.jpg" alt="" class="img-fluid">
-                <img src="assets/images/kal/restr/bawarchi.jpg" alt="" class="img-fluid">
-            </div>
+            <?php } ?>
         </div>
     </div>
 </section>
@@ -680,64 +561,35 @@
                 </div>
             	<div class="feature_post">
                     <div class="blog_list list_post">
+                    <?php
+                        $sql = "SELECT *,categories.name AS name FROM `homefeatured_posts`,`categories` WHERE homefeatured_posts.category_id=categories.id";
+                        $db->sql($sql);
+                        $result = $db->getResult();
+                        foreach ($result as $value) {
+                        ?>      
                         <div class="blog_post">
                             <div class="blog_img">
                                 <a href="#">
-                                    <img src="assets/images/kal/templ/church1.jpg" alt="blog_img2">
+                                    <img src="<?php echo "admin/" .$value['image']; ?>"alt="blog_img3">
                                 </a>
                             </div>
                             <div class="blog_content">
                                 <div class="blog_text">
                                 	<div class="blog_tags">
-                                        <a class="blog_tags_cat bg_warning" href="#">Church</a>
+                                        <a class="blog_tags_cat bg_blue" href="#"><?php echo $value['name'] ?></a>
                                     </div>
-                                    <h5 class="blog_heading"><a href="#">The blood of the martyrs is the seed of the church</a></h5>
-                                    
-                                    
-                                    <p>Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this generator on the Internet.</p>
-                                    <a href="#" class="btn btn-dark btn-sm">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="blog_post">
-                            <div class="blog_img">
-                                <a href="#">
-                                    <img src="assets/images/kal/schools/2.jpg" alt="blog_img3">
-                                </a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="blog_text">
-                                	<div class="blog_tags">
-                                        <a class="blog_tags_cat bg_blue" href="#">Schools</a>
-                                    </div>
-                                    <h5 class="blog_heading"><a href="#">The first day of school is always a fashion show.</a></h5>
-                                    <ul class="blog_meta">
+                                    <h5 class="blog_heading"><a href="#"><?php echo $value['title'] ?></a></h5>
+                                    <!-- <ul class="blog_meta">
                                         <li><a href="#"><i class="ti-calendar"></i> <span>April 14, 2018</span></a></li>
                                         <li><a href="#"><i class="ti-comments"></i> <span>2 Comments</span></a></li>
-                                    </ul>
-                                    <p>Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this generator on the Internet.</p>
+                                    </ul> -->
+                                    <p><?php echo $value['description'] ?></p>
                                     <a href="#" class="btn btn-dark btn-sm">Read More</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="blog_post">
-                            <div class="blog_img">
-                                <a href="#">
-                                    <img src="assets/images/kal/theatre/1.jpg" alt="blog_img4">
-                                </a>
-                            </div>
-                            <div class="blog_content">
-                                <div class="blog_text">
-                                	<div class="blog_tags">
-                                        <a class="blog_tags_cat bg_success" href="#">Theatres</a>
-                                    </div>
-                                    <h5 class="blog_heading"><a href="#">Watching movie stars under the stars.</a></h5>
-                                   
-                                    <p>Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this generator on the Internet.</p>
-                                    <a href="#" class="btn btn-dark btn-sm">Read More</a>
-                                </div>
-                            </div>
-                        </div>
+                        <?php } ?>
+                       
                     </div>
                  
                 </div>
@@ -863,7 +715,7 @@
         <div class="container">
             <div class="row align-items-center">
             	<div class="col-md-4">
-                	<p class="copyright m-md-0 text-center text-md-left">© 2022 All Rights Reserved By <a href="index.html" class="text_default">KAALGYAAN.</a></p>
+                	<p class="copyright m-md-0 text-center text-md-left">© 2022 All Rights Reserved By <a href="index.php" class="text_default">KAALGYAAN.</a></p>
                 </div>
                 <div class="col-lg-4">
                     <p class="m-md-0 text-center text-md-left">Designed by <a href="https://designcomm.in/" class="text_default" target="_blank">Designcomm</a></p>

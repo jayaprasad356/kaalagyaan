@@ -188,7 +188,7 @@
     </div>
 	<div class="container">
     	<nav class="navbar navbar-expand-lg"> 
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="index.php">
                 <h2 class="mb-0">KAALGYAAN</h2>
                 <!-- <img class="logo_light" src="assets/images/logo_white.png" alt="logo" />
                 <img class="logo_dark" src="assets/images/logo_dark.png" alt="logo" /> -->
@@ -197,14 +197,14 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li>
-                        <a  class="nav-link  active" href="index.html">Home</a>
+                        <a  class="nav-link  active" href="index.php">Home</a>
                     </li>
                     <li>
                         <a  class="nav-link " href="#">About</a>
                     </li>  <li>
                         <a  class="nav-link " href="#">Gallery</a>
                     </li>
-                 <li><a class="nav-link nav_item" href="contact.html">Contact</a></li>
+                 <li><a class="nav-link nav_item" href="contact.php">Contact</a></li>
                 </ul>
             </div>
             <ul class="navbar-nav attr-nav align-items-center">
@@ -213,7 +213,7 @@
                         <span class="close-search"><i class="ion-ios-close-empty"></i></span>
                         <form>
                             <input type="text" placeholder="Search" class="form-control" id="search_input">
-                            <a href="searchpage.html" type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></a>
+                            <a href="#" type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></a>
                         </form>
                     </div>
                 </li>
@@ -498,7 +498,7 @@
         <div class="container">
             <div class="row align-items-center">
             	<div class="col-md-4">
-                	<p class="copyright m-md-0 text-center text-md-left">© 2022 All Rights Reserved By <a href="index.html" class="text_default">KAALGYAAN.</a></p>
+                	<p class="copyright m-md-0 text-center text-md-left">© 2022 All Rights Reserved By <a href="index.php" class="text_default">KAALGYAAN.</a></p>
                 </div>
                 <div class="col-lg-4">
                     <p class="m-md-0 text-center text-md-left">Designed by <a href="https://designcomm.in/" class="text_default" target="_blank">Designcomm</a></p>
