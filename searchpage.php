@@ -1,3 +1,15 @@
+<?php
+include_once('admin/includes/functions.php');
+$function = new functions;
+include_once('admin/includes/custom-functions.php');
+$fn = new custom_functions;
+include_once('admin/includes/crud.php');
+$db = new Database();
+$db->connect();
+$db->sql("SET NAMES 'utf8'");
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -230,30 +242,34 @@
           <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
+        <?php
+                $sql = "SELECT * FROM `searchpage_banners`";
+                $db->sql($sql);
+                $result = $db->getResult();
+            ?>
           <div class="carousel-item active">
             <div class="banner-overlay"></div>
-            <img src="assets/images/blog_big_img5.jpg" class="d-block w-100" alt="...">
+            <img src="<?php echo "admin/" .$result[0]['image']; ?>" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-              <h5>UPCOMING EVENTS</h5>
-              <p>Some representative placeholder content for the first slide.</p>
+              <h5><?php echo $result[0]['title']; ?></h5>
+              <p><?php echo $result[0]['description']; ?></p>
             </div>
           </div>
+          <?php
+                $sql = "SELECT * FROM `searchpage_banners`";
+                $db->sql($sql);
+                $result = $db->getResult();
+                foreach ($result as $value) {
+            ?>
           <div class="carousel-item">
             <div class="banner-overlay"></div>
-            <img src="assets/images/banner_post_img2.jpg" class="d-block w-100" alt="...">
+            <img src="<?php echo "admin/" .$value['image']; ?>" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-              <h5>OnGOING EVENTS</h5>
-              <p>Some representative placeholder content for the second slide.</p>
+              <h5><?php echo $value['title']; ?></h5>
+              <p><?php echo $value['description']; ?></p>
             </div>
           </div>
-          <div class="carousel-item">
-            <div class="banner-overlay"></div>
-            <img src="assets/images/blog_big_img3.jpg" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5>Famous</h5>
-              <p>Some representative placeholder content for the third slide.</p>
-            </div>
-          </div>
+          <?php } ?>
         </div>
         <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -279,188 +295,77 @@
                 <div class="heading_s2">
                 	<h4>About</h4>
                 </div>
+                <?php
+                    $sql = "SELECT *,categories.name AS name FROM `about`,`categories` WHERE about.category_id=categories.id AND about.id=1";
+                    $db->sql($sql);
+                    $res = $db->getResult();
+                ?>
             	<div class="blog_article blog_grid_module">
                 	<div class="blog_post">
                         <div class="blog_img">
                             <a href="#">
-                            	<img src="assets/images/kal/places/2.jpg" alt="blog_img1">
+                            	<img src="<?php echo "admin/" .$res[0]['image']; ?>" alt="blog_img1">
                             </a>
                         </div>
                         <div class="blog_content">
                         	<div class="blog_text">
                         		<div class="blog_tags">
-                                    <a class="blog_tags_cat bg_blue" href="#">Place</a>
+                                    <a class="blog_tags_cat bg_blue" href="#"><?php echo $res[0]['name']; ?></a>
                                 </div>
-                        		<h5 class="blog_heading"><a href="#">Hyderabad</a></h5>
+                        		<h5 class="blog_heading"><a href="#"><?php echo $res[0]['title']; ?></a></h5>
                                
-                        		<p>Hyderabad is the capital of southern India's Telangana state. A major center for the technology industry, it's home to many upscale restaurants and shops. 
-                                    Its historic sites include Golconda Fort, a former diamond-trading center that was once the Qutb Shahi dynastic capital. The Charminar, a 16th-century 
-                                    mosque whose 4 arches support towering minarets, is an old city landmark near the long-standing Laad Bazaar. </p>
+                        		<p><?php echo $res[0]['description']; ?> </p>
                         	</div>
                         </div>
                     </div>
-                 
-              
                 </div>
-
                 <div id="accordion" class="kal">
+                <?php
+                            $sql = "SELECT DISTINCT name FROM `searchpage_accordians`,`categories` WHERE searchpage_accordians.category_id=categories.id AND city_id=1 ORDER BY name";
+                            $db->sql($sql);
+                            $result = $db->getResult();
+                            foreach ($result as $value) {
+                        ?>
                     <div class="card">
                       <div class="card-header" id="headingOne">
                         <h5 class="mb-0">
                           <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Temples <span class="accicon" id="accicon"><i class="fas fa-angle-up rotate-icon"></i></span>
+                          <?php echo $value['name']; ?> <span class="accicon" id="accicon"><i class="fas fa-angle-up rotate-icon"></i></span>
                           </button>
                         </h5>
                       </div>
-                  
                       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
-                            <p>Hyderabad, the capital city of Telangana is a major IT hub. The city has always been famous for its rich history 
-                                and delicious food. It is also home to some of the most mesmerizing temples like Ratnalayam Temple, Pedamma Temple, Sree Adinatha Jan Temple etc. Those who are in search of peace in the crowded and busy city must pay a visit to one of these best temples in Hyderabad.</p>
-                       
+                            <?php
+                                $sql = "SELECT * FROM `searchpage_accordians` WHERE category_id=1 AND city_id=1";
+                                $db->sql($sql);
+                                $result = $db->getResult();
+                            ?>
+                            <p><?php echo $result[0]['description']; ?></p>
                             <div class="row">
+                                <?php
+                                    $sql = "SELECT * FROM `searchpage_accordians` WHERE category_id=1 AND city_id=1";
+                                    $db->sql($sql);
+                                    $result = $db->getResult();
+                                    foreach($result as $value){
+                                ?>
                                 <div class="col-lg-4">
                                    <div class="card card-bod">
-                                    <img src="assets/images/kal/templ/birla.jpg" class="img-fluid" alt="">
+                                    <img src="<?php echo "admin/" .$value['image']; ?>" class="img-fluid" alt="">
                                     <div class="temple-name">
-                                        <h6 class="color p-3">Birla Mandir, <small>jubliee hills</small></h6>
+                                        <h6 class="color p-3"><?php echo $value['area_name']; ?></h6>
                                     </div>
-                                </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card card-bod">
-                                    <img src="assets/images/kal/templ/1.jpg" class="img-fluid" alt="">
-                                        <div class="temple-name">
-                                            <h6 class="color p-2">Peddamma thali temple <small>jubliee hills</small></h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card card-bod">
-                                        <img src="assets/images/kal/templ/ramanujan.jpg" class="img-fluid" alt="">
-                                            <div class="temple-name">
-                                                <h6 class="color p-2">Statue of Equality <small>shamshabad</small></h6>
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card card-bod">
-                                        <img src="assets/images/kal/templ/sanghi-temple.jpg" class="img-fluid" alt="">
-                                            <div class="temple-name">
-                                                <h6 class="color p-2">Sanghi Temple <small>ORR</small></h6>
-                                            </div>
-                                        </div>
-                                </div>
-                                <!-- <div class="col-lg-4">
-                                    <div class="card card-bod">
-                                        <img src="assets/images/kal/templ/birla.jpg" class="img-fluid" alt="">
-                                            <div class="temple-name">
-                                                <h6 class="color p-2">Peddamma thali temple <small>jubliee hills</small></h6>
-                                            </div>
-                                        </div>
-                                </div> -->
-                            </div>
-                            
-                         </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="headingTwo">
-                        <h5 class="mb-0">
-                          <button class="btn btn-link collapsed" onclick="icon()" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Places <span class="accicon"><i class="fas fa-angle-up rotate-icon"></i></span>
-                          </button>
-                        </h5>
-                      </div>
-                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                        <div class="card-body">
-                            <p>Hyderabad is the capital of southern India's Telangana state. A major center for the technology industry,
-                                 it's home to many upscale restaurants and shops. Its historic sites include Golconda Fort, a former 
-                                 diamond-trading center that was once the Qutb Shahi dynastic capital. The Charminar, a 16th-century mosque 
-                                 whose 4 arches support towering minarets, is an old city landmark near the long-standing Laad Bazaar.</p>
-
-                                 <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="card card-bod">
-                                            <img src="assets/images/kal/places/1.jpg" class="img-fluid" alt="">
-                                                <div class="temple-name">
-                                                    <h6 class="color p-2">Sanghi Temple <small>ORR</small></h6>
-                                                </div>
-                                            </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="card card-bod">
-                                            <img src="assets/images/kal/places/3.jpg" class="img-fluid" alt="">
-                                                <div class="temple-name">
-                                                    <h6 class="color p-2">Sanghi Temple <small>ORR</small></h6>
-                                                </div>
-                                            </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="card card-bod">
-                                            <img src="assets/images/kal/places/4.jpg" class="img-fluid" alt="">
-                                                <div class="temple-name">
-                                                    <h6 class="color p-2">Sanghi Temple <small>ORR</small></h6>
-                                                </div>
-                                            </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="card card-bod">
-                                            <img src="assets/images/kal/places/5.jpg" class="img-fluid" alt="">
-                                                <div class="temple-name">
-                                                    <h6 class="color p-2">Sanghi Temple <small>ORR</small></h6>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Hospitals <span class="accicon"><i class="fas fa-angle-up rotate-icon"></i></span>
-                          </button>
-                        </h5>
-                      </div>
-                      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                        <div class="card-body">
-                            <p>The city provides one of the best hospitals in India with cutting edge healthcare to people who seek medical attention from within and outside the city.</p>
-                       
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="card card-bod">
-                                        <img src="assets/images/kal/hospitals/3.jpg" class="img-fluid" alt="">
-                                            <div class="temple-name">
-                                                <h6 class="color p-2">Sanghi Temple <small>ORR</small></h6>
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card card-bod">
-                                        <img src="assets/images/kal/hospitals/2.jpg" class="img-fluid" alt="">
-                                            <div class="temple-name">
-                                                <h6 class="color p-2">Sanghi Temple <small>ORR</small></h6>
-                                            </div>
-                                        </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card card-bod">
-                                        <img src="assets/images/kal/hospitals/1.jpg" class="img-fluid" alt="">
-                                            <div class="temple-name">
-                                                <h6 class="color p-2">Sanghi Temple <small>ORR</small></h6>
-                                            </div>
-                                        </div>
                                 </div>
                             </div>
-
-                        </div>
+                            <?php } ?>
+                         </div>  
                       </div>
                     </div>
-                  </div>
+                </div>
+                 <?php } ?>
 
 
+                </div>
             </div>
             <div class="col-lg-4">
             	<div class="sidebar">
@@ -473,11 +378,23 @@
                     <div class="widget">
                     	<h5 class="widget_title">Categories</h5>
                         <ul class="widget_categories">
-                        	<li><a href="#"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img1.jpg"><div class="post_category"><span class="cat_title">Church</span><span class="cat_num">2 Post</span></div></div></a></li>
-                            <li><a href="#"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img2.jpg"><div class="post_category"><span class="cat_title">Temples</span><span class="cat_num">5 Post</span></div></div></a></li>
-                            <li><a href="#"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img3.jpg"><div class="post_category"><span class="cat_title">Hotels</span><span class="cat_num">7 Post</span></div></div></a></li>
-                            <li><a href="#"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img4.jpg"><div class="post_category"><span class="cat_title">Schools</span><span class="cat_num">4 Post</span></div></div></a></li>
-                            <li><a href="#"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img5.jpg"><div class="post_category"><span class="cat_title">Theatres</span><span class="cat_num">8 Post</span></div></div></a></li>
+                        <?php
+                        $sql = "SELECT * FROM `categories`";
+                        $db->sql($sql);
+                        $result = $db->getResult();
+                        foreach ($result as $value) {
+                        ?>
+                        	<li><a href="#<?php $value['id']; ?>"><div class="cat_bg background_bg overlay_bg_50" data-img-src="assets/images/cat_img1.jpg"><div class="post_category"><span class="cat_title"><?php echo $value['name'] ?></span><span 
+                                    class="cat_num" id=<?php echo $value['id']; ?>> <?php
+                        $sql = "SELECT * FROM `homefeatured_posts` WHERE category_id= $value[id]";
+                        $db->sql($sql);
+                        $result = $db->getResult();
+                        $num = $db->numRows($result);
+                        foreach ($result as $value) { 
+                            echo $num;
+                        }
+                        ?> Post</span></div></div></a></li>
+                            <?php } ?>  
                         </ul>
                     </div>
                     <!-- <div class="widget">
@@ -502,7 +419,6 @@
                     	</ul>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
@@ -517,21 +433,16 @@
                 	<h4>Gallery</h4>
                 </div>
             </div>
+            <?php
+                $sql = "SELECT * FROM `homegallery`";
+                $db->sql($sql);
+                $result = $db->getResult();
+                foreach ($result as $value) {
+            ?>
             <div class="col-lg-4">
-                <img src="assets/images/kal/hotel/taj.jpg" alt="" class="img-fluid">
-                <img src="assets/images/kal/shopping/2.jpg" alt="" class="img-fluid">
-                <img src="assets/images/kal/schools/1.jpg" alt="" class="img-fluid">
+                <img src="<?php echo "admin/" .$value['image']; ?>" alt="" class="img-fluid">
             </div>
-            <div class="col-lg-4">
-               
-                <img src="assets/images/kal/shopping/2.jpg" alt="" class="img-fluid">
-                <img src="assets/images/kal/theatre/1.jpg" alt="" class="img-fluid">
-                <img src="assets/images/kal/theatre/prasads-imax.jpg" alt="" class="img-fluid">
-            </div>
-            <div class="col-lg-4">
-                <img src="assets/images/kal/places/1.jpg" alt="" class="img-fluid">
-                <img src="assets/images/kal/restr/bawarchi.jpg" alt="" class="img-fluid">
-            </div>
+            <?php } ?>
         </div>
     </div>
 </section>

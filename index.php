@@ -224,7 +224,7 @@ $db->sql("SET NAMES 'utf8'");
                         <span class="close-search"><i class="ion-ios-close-empty"></i></span>
                         <form>
                             <input type="text" placeholder="Search" class="form-control" id="search_input">
-                            <a href="" type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></a>
+                            <a href="searchpage.php" type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></a>
                         </form>
                     </div>
                 </li>
@@ -536,11 +536,11 @@ $db->sql("SET NAMES 'utf8'");
                 </div>
             </div>
             <?php
-                        $sql = "SELECT * FROM `homegallery`";
-                        $db->sql($sql);
-                        $result = $db->getResult();
-                        foreach ($result as $value) {
-                        ?>
+                $sql = "SELECT * FROM `homegallery`";
+                $db->sql($sql);
+                $result = $db->getResult();
+                foreach ($result as $value) {
+            ?>
             <div class="col-lg-4">
                 <img src="<?php echo "admin/" .$value['image']; ?>" alt="" class="img-fluid">
             </div>
