@@ -28,6 +28,7 @@
                                 <tr>
                                     
                                     <th  data-field="id" data-sortable="true">ID</th>
+                                    <th data-field="city_name" data-sortable="true">City</th>
                                     <th data-field="title" data-sortable="true">Title</th>
                                     <th data-field="category_name" data-sortable="true">Category</th>
                                     <th data-field="description" data-sortable="true">Description</th>

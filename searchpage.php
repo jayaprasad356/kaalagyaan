@@ -243,7 +243,7 @@ $db->sql("SET NAMES 'utf8'");
         </ol>
         <div class="carousel-inner">
         <?php
-                $sql = "SELECT * FROM `searchpage_banners`";
+                $sql = "SELECT * FROM `searchpage_banners` WHERE city_id=1";
                 $db->sql($sql);
                 $result = $db->getResult();
             ?>
@@ -256,7 +256,7 @@ $db->sql("SET NAMES 'utf8'");
             </div>
           </div>
           <?php
-                $sql = "SELECT * FROM `searchpage_banners`";
+                $sql = "SELECT * FROM `searchpage_banners` WHERE city_id=1";
                 $db->sql($sql);
                 $result = $db->getResult();
                 foreach ($result as $value) {
@@ -296,7 +296,7 @@ $db->sql("SET NAMES 'utf8'");
                 	<h4>About</h4>
                 </div>
                 <?php
-                    $sql = "SELECT *,categories.name AS name FROM `about`,`categories` WHERE about.category_id=categories.id AND about.id=1";
+                    $sql = "SELECT *,categories.name AS name FROM `about`,`categories` WHERE about.category_id=categories.id AND city_id=1";
                     $db->sql($sql);
                     $res = $db->getResult();
                 ?>
@@ -434,7 +434,7 @@ $db->sql("SET NAMES 'utf8'");
                 </div>
             </div>
             <?php
-                $sql = "SELECT * FROM `homegallery`";
+                $sql = "SELECT * FROM `searchgallery` WHERE city_id=1";
                 $db->sql($sql);
                 $result = $db->getResult();
                 foreach ($result as $value) {

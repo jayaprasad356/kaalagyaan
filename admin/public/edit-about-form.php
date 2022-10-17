@@ -16,6 +16,7 @@ if (isset($_GET['id'])) {
 
 if (isset($_POST['btnEdit'])) {
 	$title = $db->escapeString(($_POST['title']));
+	$city = $db->escapeString(($_POST['city']));
 	$description = $db->escapeString(($_POST['description']));
 
 	$category = $db->escapeString(($_POST['category']));
@@ -23,6 +24,9 @@ if (isset($_POST['btnEdit'])) {
         
 	if (empty($title)) {
 		$error['title'] = " <span class='label label-danger'>Required!</span>";
+	}
+	if (empty($city)) {
+		$error['city'] = " <span class='label label-danger'>Required!</span>";
 	}
 	if (empty($description)) {
 		$error['description'] = " <span class='label label-danger'>Required!</span>";
@@ -32,7 +36,7 @@ if (isset($_POST['btnEdit'])) {
 		$error['category'] = " <span class='label label-danger'>Required!</span>";
 	}
   
-		if (!empty($title) && !empty($description) && !empty($category) ) 
+		if (!empty($title) && !empty($city) && !empty($description) && !empty($category) ) 
 		{
 			if ($_FILES['image']['size'] != 0 && $_FILES['image']['error'] == 0 && !empty($_FILES['image'])) {
 				//image isn't empty and update the image
@@ -57,7 +61,7 @@ if (isset($_POST['btnEdit'])) {
 				$db->sql($sql);
 			}
 				
-				$sql_query = "UPDATE about SET title='$title',category_id='$category',description='$description' WHERE id=$ID";
+				$sql_query = "UPDATE about SET title='$title',category_id='$category',city_id='$city',description='$description' WHERE id=$ID";
 				$db->sql($sql_query);
 				$result = $db->getResult();
 				if (!empty($result)) {
@@ -108,6 +112,26 @@ if (isset($_POST['btnCancel'])) { ?>
 											<h3>Edit Home Banner</h3>
 											<section>
 												<h6 class="h-0 m-0">&nbsp;</h6>
+												<div class="row gutters">
+													<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+														
+														<div class="field-wrapper">
+														   <select id='city' name="city"  data-live-search="true">
+																<option value="">Select</option>
+																	<?php
+																	$sql = "SELECT id,name FROM `cities`";
+																	$db->sql($sql);
+																	$result = $db->getResult();
+																	foreach ($result as $value) {
+																	?>
+																<option value='<?= $value['id'] ?>' <?= $value['id']==$res[0]['city_id'] ? 'selected="selected"' : '';?>><?= $value['name'] ?></option>
+																<?php } ?>
+															</select>
+															<div class="field-placeholder">Title<i class="text-danger asterik">*</i><?php echo isset($error['title']) ? $error['title'] : ''; ?></div>
+														</div>
+
+													</div>
+												</div>
 												<div class="row gutters">
 													<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 														

@@ -222,9 +222,9 @@ $db->sql("SET NAMES 'utf8'");
                 <li><a href="javascript:void(0);" class="nav-link search_trigger"><i class="linearicons-magnifier"></i></a>
                     <div class="search_wrap">
                         <span class="close-search"><i class="ion-ios-close-empty"></i></span>
-                        <form>
-                            <input type="text" placeholder="Search" class="form-control" id="search_input">
-                            <a href="searchpage.php" type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></a>
+                        <form  method="post">
+                            <input type="text" placeholder="Search" name=city_name class="form-control" id="search_input">
+                            <button  type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></button>
                         </form>
                     </div>
                 </li>
@@ -233,6 +233,33 @@ $db->sql("SET NAMES 'utf8'");
 	</div>
 </header>
 <!-- START HEADER --> 
+<?php
+if (isset($_POST['submit'])) {
+
+    // get email and password
+    $city_name = $db->escapeString($_POST['city_name']);
+
+  
+
+    // check whether $email is empty or not
+    if (empty($city_name)) {
+        $error['city_name'] = "*Email should be filled.";
+    }
+
+
+    // if email and password is not empty, check in database
+    if (!empty($city_name) ) {
+        if($city_name == 'Hyderabad'){
+         
+            header("location: searchpage.php");
+            
+        }
+        else{
+            $error['failed'] = "<span class='label label-danger'>Invalid Email or Password!</span>";
+        }
+    }
+}
+?>
 
 <!-- START SECTION BANNER -->
 <div class="banner_blog slide_type3">

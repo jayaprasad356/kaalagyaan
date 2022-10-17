@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2022 at 08:04 AM
+-- Generation Time: Oct 17, 2022 at 02:00 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `about` (
   `id` int(11) NOT NULL,
   `title` text DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `image` text DEFAULT NULL
@@ -39,8 +40,8 @@ CREATE TABLE `about` (
 -- Dumping data for table `about`
 --
 
-INSERT INTO `about` (`id`, `title`, `category_id`, `description`, `image`) VALUES
-(1, 'Hyderabad', 8, '<p>Hyderabad is the capital of southern India&#39;s Telangana state. A major center for the technology industry, it&#39;s home to many upscale restaurants and shops. Its historic sites include Golconda Fort, a former diamond-trading center that was once the Qutb Shahi dynastic capital. The Charminar, a 16th-century mosque whose 4 arches support towering minarets, is an old city landmark near the long-standing Laad Bazaar.</p>\r\n', 'upload/about/6009-2022-10-15.jpg');
+INSERT INTO `about` (`id`, `title`, `city_id`, `category_id`, `description`, `image`) VALUES
+(1, 'Hyderabad', 1, 8, '<p>Hyderabad is the capital of southern India&#39;s Telangana state. A major center for the technology industry, it&#39;s home to many upscale restaurants and shops. Its historic sites include Golconda Fort, a former diamond-trading center that was once the Qutb Shahi dynastic capital. The Charminar, a 16th-century mosque whose 4 arches support towering minarets, is an old city landmark near the long-standing Laad Bazaar.</p>\r\n', 'upload/about/6009-2022-10-15.jpg');
 
 -- --------------------------------------------------------
 
@@ -192,6 +193,7 @@ INSERT INTO `hometrending_posts` (`id`, `title`, `category_id`, `description`, `
 
 CREATE TABLE `searchgallery` (
   `id` int(11) NOT NULL,
+  `city_id` int(11) DEFAULT NULL,
   `image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -199,14 +201,14 @@ CREATE TABLE `searchgallery` (
 -- Dumping data for table `searchgallery`
 --
 
-INSERT INTO `searchgallery` (`id`, `image`) VALUES
-(1, 'upload/searchgallery/4051-2022-10-15.jpg'),
-(2, 'upload/searchgallery/7561-2022-10-15.jpg'),
-(3, 'upload/searchgallery/9973-2022-10-15.jpg'),
-(4, 'upload/searchgallery/6586-2022-10-15.jpg'),
-(5, 'upload/searchgallery/2668-2022-10-15.jpg'),
-(6, 'upload/searchgallery/2113-2022-10-15.jpg'),
-(7, 'upload/searchgallery/1845-2022-10-15.jpg');
+INSERT INTO `searchgallery` (`id`, `city_id`, `image`) VALUES
+(1, 1, 'upload/searchgallery/4051-2022-10-15.jpg'),
+(2, 1, 'upload/searchgallery/7561-2022-10-15.jpg'),
+(3, 1, 'upload/searchgallery/9973-2022-10-15.jpg'),
+(4, 1, 'upload/searchgallery/6586-2022-10-15.jpg'),
+(5, 1, 'upload/searchgallery/2668-2022-10-15.jpg'),
+(6, 1, 'upload/searchgallery/2113-2022-10-15.jpg'),
+(7, 1, 'upload/searchgallery/1845-2022-10-15.jpg');
 
 -- --------------------------------------------------------
 
@@ -243,6 +245,7 @@ INSERT INTO `searchpage_accordians` (`id`, `city_id`, `category_id`, `descriptio
 CREATE TABLE `searchpage_banners` (
   `id` int(11) NOT NULL,
   `title` text DEFAULT NULL,
+  `city_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `image` text DEFAULT NULL
@@ -252,11 +255,11 @@ CREATE TABLE `searchpage_banners` (
 -- Dumping data for table `searchpage_banners`
 --
 
-INSERT INTO `searchpage_banners` (`id`, `title`, `category_id`, `description`, `image`) VALUES
-(1, 'UPCOMING EVENTS', 8, '<p> <strong>An event is something that happens</strong> , especially when it is unusual or important</p>\r\n', 'upload/searchbanner/4867-2022-10-15.jpg'),
-(2, 'OnGOING EVENTS', 8, '<p>India Today gives information on all the major events in India, <strong>Current Events</strong>, ... Indian Events Calendar and <strong>upcoming events</strong> that are to be held in India</p>\r\n', 'upload/searchbanner/5432-2022-10-15.jpg'),
-(3, 'Famous', 8, '<p>Famous <strong>people are people who are well known throughout the world for what they have done</strong>.</p>\r\n', 'upload/searchbanner/9898-2022-10-15.jpg'),
-(4, 'Latest', 8, '<p>Check out the <strong>latest</strong> news from India and around the world. <strong>Latest</strong> India news on Bollywood, Politics, Business, Cricket, Technology and Travel.</p>\r\n', 'upload/searchbanner/9125-2022-10-15.jpg');
+INSERT INTO `searchpage_banners` (`id`, `title`, `city_id`, `category_id`, `description`, `image`) VALUES
+(1, 'UPCOMING EVENTS', 1, 8, '<p> <strong>An event is something that happens</strong> , especially when it is unusual or important</p>\r\n', 'upload/searchbanner/4867-2022-10-15.jpg'),
+(2, 'OnGOING EVENTS', 1, 8, '<p>India Today gives information on all the major events in India, <strong>Current Events</strong>, ... Indian Events Calendar and <strong>upcoming events</strong> that are to be held in India</p>\r\n', 'upload/searchbanner/5432-2022-10-15.jpg'),
+(3, 'Famous', 1, 8, '<p>Famous <strong>people are people who are well known throughout the world for what they have done</strong>.</p>\r\n', 'upload/searchbanner/9898-2022-10-15.jpg'),
+(4, 'Latest', 1, 8, '<p>Check out the <strong>latest</strong> news from India and around the world. <strong>Latest</strong> India news on Bollywood, Politics, Business, Cricket, Technology and Travel.</p>\r\n', 'upload/searchbanner/9125-2022-10-15.jpg');
 
 --
 -- Indexes for dumped tables

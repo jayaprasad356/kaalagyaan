@@ -10,7 +10,7 @@ if (isset($_POST['btnAdd'])) {
 
         $title = $db->escapeString(($_POST['title']));
 		$description = $db->escapeString(($_POST['description']));
-
+		$city = $db->escapeString(($_POST['city']));
         $category = $db->escapeString(($_POST['category']));
 
 		  // get image info
@@ -33,6 +33,9 @@ if (isset($_POST['btnAdd'])) {
         if (empty($title)) {
             $error['title'] = " <span class='label label-danger'>Required!</span>";
         }
+		if (empty($city)) {
+            $error['city'] = " <span class='label label-danger'>Required!</span>";
+        }
 		if (empty($description)) {
             $error['description'] = " <span class='label label-danger'>Required!</span>";
         }
@@ -43,7 +46,7 @@ if (isset($_POST['btnAdd'])) {
       
        
        
-       if (!empty($title) && !empty($description) && !empty($category) ) {
+       if (!empty($title) && !empty($city) && !empty($description) && !empty($category) ) {
 
 				$result = $fn->validate_image($_FILES["product_image"]);
 				// create random image file name
@@ -57,7 +60,7 @@ if (isset($_POST['btnAdd'])) {
 				// insert new data to menu table
 				$upload_image = 'upload/about/' . $menu_image;
             
-            $sql_query = "INSERT INTO about (title,category_id,description,image)VALUE('$title','$category','$description','$upload_image')";
+            $sql_query = "INSERT INTO about (title,category_id,city_id,description,image)VALUE('$title','$category','$city','$description','$upload_image')";
             $db->sql($sql_query);
             $result = $db->getResult();
             if (!empty($result)) {
@@ -97,6 +100,26 @@ if (isset($_POST['btnAdd'])) {
 											<h3>Add About Information</h3>
 											<section>
 												<h6 class="h-0 m-0">&nbsp;</h6>
+												<div class="row gutters">
+													<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+														
+														<div class="field-wrapper">
+														    <select id='city' name="city" class="select-single js-states" title="Select City" data-live-search="true" required>
+																<option value="">select</option>
+																	<?php
+																	$sql = "SELECT id,name FROM `cities`";
+																	$db->sql($sql);
+																	$result = $db->getResult();
+																	foreach ($result as $value) {
+																	?>
+																		<option value='<?= $value['id'] ?>'><?= $value['name'] ?></option>
+																<?php } ?>
+															</select>
+															<div class="field-placeholder">City Name<i class="text-danger asterik">*</i><?php echo isset($error['city']) ? $error['city'] : ''; ?></div>
+														</div>
+
+													</div>
+												</div>
 												<div class="row gutters">
 													<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
 														

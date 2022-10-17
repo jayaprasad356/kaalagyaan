@@ -8,6 +8,9 @@ $fn = new custom_functions;
 <?php
 if (isset($_POST['btnAdd'])) {
 
+
+	$city = $db->escapeString(($_POST['city']));
+
 		  // get image info
 		  $menu_image = $db->escapeString($_FILES['product_image']['name']);
 		  $image_error = $db->escapeString($_FILES['product_image']['error']);
@@ -22,8 +25,12 @@ if (isset($_POST['btnAdd'])) {
 		  error_reporting(E_ERROR | E_PARSE);
 		  $extension = end(explode(".", $_FILES["product_image"]["name"]));
 
-       
+		  if (empty($city)) {
+            $error['city'] = " <span class='label label-danger'>Required!</span>";
+        }
 
+        if (!empty($city)) 
+		{
 				$result = $fn->validate_image($_FILES["product_image"]);
 				// create random image file name
 				$string = '0123456789';
@@ -36,7 +43,7 @@ if (isset($_POST['btnAdd'])) {
 				// insert new data to menu table
 				$upload_image = 'upload/searchgallery/' . $menu_image;
             
-            $sql_query = "INSERT INTO searchgallery (image)VALUE('$upload_image')";
+            $sql_query = "INSERT INTO searchgallery (city_id,image)VALUE('$city','$upload_image')";
             $db->sql($sql_query);
             $result = $db->getResult();
             if (!empty($result)) {
@@ -53,6 +60,7 @@ if (isset($_POST['btnAdd'])) {
                 $error['add_searchgallery'] = " <span class='text text-danger'>Failed</span>";
             }
             }
+		}
 ?>
 
     <?php echo isset($error['add_searchgallery']) ? $error['add_searchgallery'] : ''; ?>
@@ -75,18 +83,37 @@ if (isset($_POST['btnAdd'])) {
 											<h3>Add Gallery</h3>
 											<section>
 												<h6 class="h-0 m-0">&nbsp;</h6>
-												    <div class="row gutters">
-															<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="border:1px solid;">
-																<div class="field-wrapper" >
-																	<div class="field-placeholder">Upload Image <span class="text-danger">*</span></div>
+												<div class="row gutters">
+													<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+														
+														<div class="field-wrapper">
+														    <select id='city' name="city" class="select-single js-states" title="Select City" data-live-search="true" required>
+																<option value="">select</option>
+																	<?php
+																	$sql = "SELECT id,name FROM `cities`";
+																	$db->sql($sql);
+																	$result = $db->getResult();
+																	foreach ($result as $value) {
+																	?>
+																		<option value='<?= $value['id'] ?>'><?= $value['name'] ?></option>
+																<?php } ?>
+															</select>
+															<div class="field-placeholder">City Name<i class="text-danger asterik">*</i><?php echo isset($error['city']) ? $error['city'] : ''; ?></div>
+														</div>
+													</div>
+												</div>
+												<div class="row gutters">
+														<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="border:1px solid;">
+															<div class="field-wrapper" >
+																<div class="field-placeholder">Upload Image <span class="text-danger">*</span></div>
 
-																		<div class="dz-message needsclick">
-																			<input type="file" name="product_image" onchange="readURL(this);" accept="image/png,  image/jpeg" id="product_image" required/>
-																			<img id="blah" src="#" alt="" style="margin:10px;"/>
-																		</div>					
-															    </div>
-														    </div>
-												    </div>
+																	<div class="dz-message needsclick">
+																		<input type="file" name="product_image" onchange="readURL(this);" accept="image/png,  image/jpeg" id="product_image" required/>
+																		<img id="blah" src="#" alt="" style="margin:10px;"/>
+																	</div>					
+															</div>
+														</div>
+												</div>
 											</section>
 		                            </div>
 

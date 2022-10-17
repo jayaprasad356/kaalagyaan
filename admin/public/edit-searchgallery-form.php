@@ -15,6 +15,16 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['btnEdit'])) {
+
+	$city = $db->escapeString(($_POST['city']));
+
+	if (empty($city)) {
+		$error['city'] = " <span class='label label-danger'>Required!</span>";
+	}
+
+	
+	if ( !empty($city) ) 
+	{
 	
 			if ($_FILES['image']['size'] != 0 && $_FILES['image']['error'] == 0 && !empty($_FILES['image'])) {
 				//image isn't empty and update the image
@@ -38,6 +48,9 @@ if (isset($_POST['btnEdit'])) {
 
 				$sql = "UPDATE searchgallery SET `image`='" . $upload_image . "' WHERE `id`=" . $ID;
 				$db->sql($sql);
+			}
+			     $sql_query = "UPDATE searchgallery SET city_id='$city' WHERE id=$ID";
+				$db->sql($sql_query);
 				$result = $db->getResult();
 				if (!empty($result)) {
 					$result = 0;
@@ -87,18 +100,38 @@ if (isset($_POST['btnCancel'])) { ?>
 											<h3>Edit Gallery</h3>
 											<section>
 												<h6 class="h-0 m-0">&nbsp;</h6>
-												    <div class="row gutters">
-															<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="border:1px solid;">
-																<div class="field-wrapper" >
-																	<div class="field-placeholder">Upload Image <span class="text-danger">*</span></div>
+												<div class="row gutters">
+													<div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+														
+														<div class="field-wrapper">
+														   <select id='city' name="city"  data-live-search="true">
+																<option value="">Select</option>
+																	<?php
+																	$sql = "SELECT id,name FROM `cities`";
+																	$db->sql($sql);
+																	$result = $db->getResult();
+																	foreach ($result as $value) {
+																	?>
+																<option value='<?= $value['id'] ?>' <?= $value['id']==$res[0]['city_id'] ? 'selected="selected"' : '';?>><?= $value['name'] ?></option>
+																<?php } ?>
+															</select>
+															<div class="field-placeholder">Title<i class="text-danger asterik">*</i><?php echo isset($error['title']) ? $error['title'] : ''; ?></div>
+														</div>
 
-																		<div class="dz-message needsclick">
-																		<input type="file" accept="image/png,  image/jpeg" onchange="readURL(this);"  name="image" id="image">
-                                                                         <p class="help-block"><img id="blah" src="<?php echo $res[0]['image']; ?>" style="margin:10px;" /></p>
-																		</div>					
-															    </div>
-														    </div>
-												    </div>
+													</div>
+												</div>
+												<div class="row gutters">
+														<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style="border:1px solid;">
+															<div class="field-wrapper" >
+																<div class="field-placeholder">Upload Image <span class="text-danger">*</span></div>
+
+																	<div class="dz-message needsclick">
+																	<input type="file" accept="image/png,  image/jpeg" onchange="readURL(this);"  name="image" id="image">
+																		<p class="help-block"><img id="blah" src="<?php echo $res[0]['image']; ?>" style="margin:10px;" /></p>
+																	</div>					
+															</div>
+														</div>
+												</div>
 											</section>
                                     </div>
 									<div class="card-footer">

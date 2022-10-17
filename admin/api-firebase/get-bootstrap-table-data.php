@@ -455,7 +455,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'searchpagebanners') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "WHERE s.id like '%" . $search . "%' OR c.name like '%" . $search . "%' OR s.title like '%" . $search . "%' OR s.description like '%" . $search . "%'";
+        $where .= "WHERE s.id like '%" . $search . "%' OR ct.name like '%" . $search . "%' OR s.title like '%" . $search . "%' OR s.description like '%" . $search . "%' OR c.name like '%" . $search . "%'";
     }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
@@ -464,7 +464,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'searchpagebanners') {
         $order = $db->escapeString($_GET['order']);
     }
 
-    $join = "LEFT JOIN `categories` c ON s.category_id = c.id";
+    $join = "LEFT JOIN `categories` ct ON s.category_id = ct.id  LEFT JOIN `cities` c ON c.id = s.city_id";
 
     $sql = "SELECT COUNT(*) as total FROM `searchpage_banners` s $join " . $where . "";
     $db->sql($sql);
@@ -472,7 +472,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'searchpagebanners') {
     foreach ($res as $row)
         $total = $row['total'];
    
-    $sql = "SELECT s.id AS id,s.*,c.name AS category_name FROM `searchpage_banners` s $join 
+    $sql = "SELECT s.id AS id,s.*,ct.name AS category_name,c.name AS city_name FROM `searchpage_banners` s $join 
     $where ORDER BY $sort $order LIMIT $offset, $limit";
     $db->sql($sql);
     $res = $db->getResult();
@@ -490,6 +490,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'searchpagebanners') {
         $operate .= ' <a class="text text-danger" href="delete-searchpagebanner.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['title'] = $row['title'];
+        $tempRow['city_name'] = $row['city_name'];
         $tempRow['category_name'] = $row['category_name'];
         $tempRow['description'] = $row['description'];
         if(!empty($row['image'])){
@@ -525,7 +526,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'about') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "WHERE a.id like '%" . $search . "%' OR c.name like '%" . $search . "%' OR a.title like '%" . $search . "%' OR a.description like '%" . $search . "%'";
+        $where .= "WHERE a.id like '%" . $search . "%' OR c.name like '%" . $search . "%' OR a.title like '%" . $search . "%' OR a.description like '%" . $search . "%' OR ct.name like '%" . $search . "%'";
     }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
@@ -534,7 +535,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'about') {
         $order = $db->escapeString($_GET['order']);
     }
 
-    $join = "LEFT JOIN `categories` c ON a.category_id = c.id";
+    $join = "LEFT JOIN `categories` ct ON a.category_id = ct.id  LEFT JOIN `cities` c ON c.id = a.city_id";
 
     $sql = "SELECT COUNT(*) as total FROM `about` a $join " . $where . "";
     $db->sql($sql);
@@ -542,7 +543,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'about') {
     foreach ($res as $row)
         $total = $row['total'];
    
-    $sql = "SELECT a.id AS id,a.*,c.name AS category_name FROM `about` a $join 
+    $sql = "SELECT a.id AS id,a.*,ct.name AS category_name,c.name AS city_name FROM `about` a $join 
     $where ORDER BY $sort $order LIMIT $offset, $limit";
     $db->sql($sql);
     $res = $db->getResult();
@@ -560,6 +561,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'about') {
         $operate .= ' <a class="text text-danger" href="delete-about.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['title'] = $row['title'];
+        $tempRow['city_name'] = $row['city_name'];
         $tempRow['category_name'] = $row['category_name'];
         $tempRow['description'] = $row['description'];
         if(!empty($row['image'])){
@@ -667,7 +669,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'searchgallery') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "WHERE id like '%" . $search . "%'";
+        $where .= "WHERE id like '%" . $search . "%' OR c.name like '%" . $search . "%'";
     }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
@@ -676,14 +678,16 @@ if (isset($_GET['table']) && $_GET['table'] == 'searchgallery') {
         $order = $db->escapeString($_GET['order']);
     }
 
+    $join = "LEFT JOIN `cities` c ON s.city_id = c.id";
 
-    $sql = "SELECT COUNT(`id`) as total FROM `searchgallery`";
+    $sql = "SELECT COUNT(*) as total FROM `searchgallery` s $join " . $where . "";
     $db->sql($sql);
     $res = $db->getResult();
     foreach ($res as $row)
         $total = $row['total'];
    
-    $sql = "SELECT * FROM searchgallery " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    $sql = "SELECT s.id AS id,s.*,c.name AS city_name FROM `searchgallery` s $join 
+    $where ORDER BY $sort $order LIMIT $offset, $limit";    
     $db->sql($sql);
     $res = $db->getResult();
 
@@ -699,6 +703,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'searchgallery') {
         $operate = ' <a href="edit-searchgallery.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-searchgallery.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
+        $tempRow['city_name'] = $row['city_name'];
         if(!empty($row['image'])){
             $tempRow['image'] = "<a data-lightbox='category' href='" . $row['image'] . "' data-caption='" . $row['image'] . "'><img src='" . $row['image'] . "' title='" . $row['image'] . "' height='50' /></a>";
 
