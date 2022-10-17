@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 15, 2022 at 09:04 AM
+-- Generation Time: Oct 17, 2022 at 08:04 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -35,6 +35,13 @@ CREATE TABLE `about` (
   `image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `about`
+--
+
+INSERT INTO `about` (`id`, `title`, `category_id`, `description`, `image`) VALUES
+(1, 'Hyderabad', 8, '<p>Hyderabad is the capital of southern India&#39;s Telangana state. A major center for the technology industry, it&#39;s home to many upscale restaurants and shops. Its historic sites include Golconda Fort, a former diamond-trading center that was once the Qutb Shahi dynastic capital. The Charminar, a 16th-century mosque whose 4 arches support towering minarets, is an old city landmark near the long-standing Laad Bazaar.</p>\r\n', 'upload/about/6009-2022-10-15.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -57,7 +64,8 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 (4, 'Theatres'),
 (5, 'Shopping'),
 (6, 'Restaurents'),
-(7, 'Church');
+(7, 'Church'),
+(8, 'Places');
 
 -- --------------------------------------------------------
 
@@ -71,6 +79,13 @@ CREATE TABLE `cities` (
   `state` text DEFAULT NULL,
   `pincode` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cities`
+--
+
+INSERT INTO `cities` (`id`, `name`, `state`, `pincode`) VALUES
+(1, 'Hyderabad', 'Telangana', '877999');
 
 -- --------------------------------------------------------
 
@@ -180,6 +195,19 @@ CREATE TABLE `searchgallery` (
   `image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `searchgallery`
+--
+
+INSERT INTO `searchgallery` (`id`, `image`) VALUES
+(1, 'upload/searchgallery/4051-2022-10-15.jpg'),
+(2, 'upload/searchgallery/7561-2022-10-15.jpg'),
+(3, 'upload/searchgallery/9973-2022-10-15.jpg'),
+(4, 'upload/searchgallery/6586-2022-10-15.jpg'),
+(5, 'upload/searchgallery/2668-2022-10-15.jpg'),
+(6, 'upload/searchgallery/2113-2022-10-15.jpg'),
+(7, 'upload/searchgallery/1845-2022-10-15.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -195,6 +223,17 @@ CREATE TABLE `searchpage_accordians` (
   `image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `searchpage_accordians`
+--
+
+INSERT INTO `searchpage_accordians` (`id`, `city_id`, `category_id`, `description`, `area_name`, `image`) VALUES
+(1, 1, 1, '<p>Hyderabad, the capital city of Telangana is a major IT hub. The city has always been famous for its rich history and delicious food. It is also home to some of the most mesmerizing temples like Ratnalayam Temple, Pedamma Temple, Sree Adinatha Jan Temple etc. Those who are in search of peace in the crowded and busy city must pay a visit to one of these best temples in Hyderabad.</p>\r\n', 'Birla Mandir, jubliee hills', 'upload/accordians/8663-2022-10-16.jpg'),
+(2, 1, 1, '<p>Hello this is sample</p>\r\n', 'Peddamma thali temple jubliee hills', 'upload/accordians/3493-2022-10-16.jpg'),
+(3, 1, 1, '<p>test</p>\r\n', 'Statue of Equality shamshabad', 'upload/accordians/3214-2022-10-16.jpg'),
+(4, 1, 1, '<ul>\r\n	<li>Jagannath Temple. Built by the Odiya Community, Jagannath Temple is considered to be the most famous temple in the entire city of Hyderabad. ...</li>\r\n</ul>\r\n', 'Sanghi Temple ORR', 'upload/accordians/9883-2022-10-16.jpg'),
+(5, 1, 4, '<p>Theatre or theater is a collaborative form of performing art that uses live performers, usually actors or actresses, to present the experience of a real or imagined event before a live audience in a specific place, often a stage.</p>\r\n', 'Imax Prasad Cinemas.', 'upload/accordians/9523-2022-10-16.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -208,6 +247,16 @@ CREATE TABLE `searchpage_banners` (
   `description` text DEFAULT NULL,
   `image` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `searchpage_banners`
+--
+
+INSERT INTO `searchpage_banners` (`id`, `title`, `category_id`, `description`, `image`) VALUES
+(1, 'UPCOMING EVENTS', 8, '<p> <strong>An event is something that happens</strong> , especially when it is unusual or important</p>\r\n', 'upload/searchbanner/4867-2022-10-15.jpg'),
+(2, 'OnGOING EVENTS', 8, '<p>India Today gives information on all the major events in India, <strong>Current Events</strong>, ... Indian Events Calendar and <strong>upcoming events</strong> that are to be held in India</p>\r\n', 'upload/searchbanner/5432-2022-10-15.jpg'),
+(3, 'Famous', 8, '<p>Famous <strong>people are people who are well known throughout the world for what they have done</strong>.</p>\r\n', 'upload/searchbanner/9898-2022-10-15.jpg'),
+(4, 'Latest', 8, '<p>Check out the <strong>latest</strong> news from India and around the world. <strong>Latest</strong> India news on Bollywood, Politics, Business, Cricket, Technology and Travel.</p>\r\n', 'upload/searchbanner/9125-2022-10-15.jpg');
 
 --
 -- Indexes for dumped tables
@@ -281,19 +330,19 @@ ALTER TABLE `searchpage_banners`
 -- AUTO_INCREMENT for table `about`
 --
 ALTER TABLE `about`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `homebanners`
@@ -323,19 +372,19 @@ ALTER TABLE `hometrending_posts`
 -- AUTO_INCREMENT for table `searchgallery`
 --
 ALTER TABLE `searchgallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `searchpage_accordians`
 --
 ALTER TABLE `searchpage_accordians`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `searchpage_banners`
 --
 ALTER TABLE `searchpage_banners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
