@@ -7,6 +7,8 @@ include_once('admin/includes/crud.php');
 $db = new Database();
 $db->connect();
 $db->sql("SET NAMES 'utf8'");
+session_start();
+$city_id = $_SESSION['city_id'];
 ?>
 
 
@@ -243,7 +245,7 @@ $db->sql("SET NAMES 'utf8'");
         </ol>
         <div class="carousel-inner">
         <?php
-                $sql = "SELECT * FROM `searchpage_banners` WHERE city_id=1";
+                $sql = "SELECT * FROM `searchpage_banners` WHERE city_id='$city_id'";
                 $db->sql($sql);
                 $result = $db->getResult();
             ?>
@@ -256,7 +258,7 @@ $db->sql("SET NAMES 'utf8'");
             </div>
           </div>
           <?php
-                $sql = "SELECT * FROM `searchpage_banners` WHERE city_id=1";
+                $sql = "SELECT * FROM `searchpage_banners` WHERE city_id='$city_id'";
                 $db->sql($sql);
                 $result = $db->getResult();
                 foreach ($result as $value) {
@@ -296,7 +298,7 @@ $db->sql("SET NAMES 'utf8'");
                 	<h4>About</h4>
                 </div>
                 <?php
-                    $sql = "SELECT *,categories.name AS name FROM `about`,`categories` WHERE about.category_id=categories.id AND city_id=1";
+                    $sql = "SELECT *,categories.name AS name FROM `about`,`categories` WHERE about.category_id=categories.id AND about.city_id=$city_id";
                     $db->sql($sql);
                     $res = $db->getResult();
                 ?>
@@ -321,7 +323,7 @@ $db->sql("SET NAMES 'utf8'");
                 </div>
                 <div id="accordion" class="kal">
                 <?php
-                            $sql = "SELECT DISTINCT name FROM `searchpage_accordians`,`categories` WHERE searchpage_accordians.category_id=categories.id AND city_id=1 ORDER BY name";
+                            $sql = "SELECT DISTINCT name FROM `searchpage_accordians`,`categories` WHERE searchpage_accordians.category_id=categories.id AND city_id='$city_id' ORDER BY name";
                             $db->sql($sql);
                             $result = $db->getResult();
                             foreach ($result as $value) {
@@ -329,7 +331,7 @@ $db->sql("SET NAMES 'utf8'");
                     <div class="card">
                       <div class="card-header" id="headingOne">
                         <h5 class="mb-0">
-                          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          <button  class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                           <?php echo $value['name']; ?> <span class="accicon" id="accicon"><i class="fas fa-angle-up rotate-icon"></i></span>
                           </button>
                         </h5>
@@ -337,14 +339,14 @@ $db->sql("SET NAMES 'utf8'");
                       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
                             <?php
-                                $sql = "SELECT * FROM `searchpage_accordians` WHERE category_id=1 AND city_id=1";
+                                $sql = "SELECT * FROM `searchpage_accordians` WHERE category_id=1 AND city_id='$city_id'";
                                 $db->sql($sql);
                                 $result = $db->getResult();
                             ?>
                             <p><?php echo $result[0]['description']; ?></p>
                             <div class="row">
                                 <?php
-                                    $sql = "SELECT * FROM `searchpage_accordians` WHERE category_id=1 AND city_id=1";
+                                    $sql = "SELECT * FROM `searchpage_accordians` WHERE category_id=1 AND city_id='$city_id'";
                                     $db->sql($sql);
                                     $result = $db->getResult();
                                     foreach($result as $value){
@@ -434,7 +436,7 @@ $db->sql("SET NAMES 'utf8'");
                 </div>
             </div>
             <?php
-                $sql = "SELECT * FROM `searchgallery` WHERE city_id=1";
+                $sql = "SELECT * FROM `searchgallery` WHERE city_id='$city_id'";
                 $db->sql($sql);
                 $result = $db->getResult();
                 foreach ($result as $value) {
