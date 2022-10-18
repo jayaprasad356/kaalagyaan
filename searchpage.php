@@ -339,14 +339,14 @@ $city_id = $_SESSION['city_id'];
                       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
                             <?php
-                                $sql = "SELECT * FROM `searchpage_accordians` WHERE category_id=1 AND city_id='$city_id'";
+                                $sql = "SELECT * FROM `searchpage_accordians` WHERE city_id='$city_id'";
                                 $db->sql($sql);
                                 $result = $db->getResult();
                             ?>
                             <p><?php echo $result[0]['description']; ?></p>
                             <div class="row">
                                 <?php
-                                    $sql = "SELECT * FROM `searchpage_accordians` WHERE category_id=1 AND city_id='$city_id'";
+                                    $sql = "SELECT * FROM `searchpage_accordians` WHERE city_id='$city_id'";
                                     $db->sql($sql);
                                     $result = $db->getResult();
                                     foreach($result as $value){
