@@ -118,7 +118,7 @@ $fn = new custom_functions;
 					<div class="tab-content">
 								
 						<!-- Chat tab -->
-						<div class="tab-pane fade show active" id="tab-home" role="tabpanel" aria-labelledby="home-tab">
+						<div class="tab-pane fade show active"  role="tabpanel" aria-labelledby="home-tab">
 
 							<!-- Tab content header start -->
 							<div class="tab-pane-header">
