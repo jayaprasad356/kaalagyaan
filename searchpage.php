@@ -238,40 +238,28 @@ $city_id = $_SESSION['city_id'];
 
 <section class="search">
     <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
+        <!-- <ol class="carousel-indicators">
           <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
           <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
-        </ol>
+        </ol> -->
         <div class="carousel-inner">
         <?php
-                $sql = "SELECT * FROM `searchpage_banners` WHERE city_id='$city_id'";
-                $db->sql($sql);
-                $result = $db->getResult();
-            ?>
-          <div class="carousel-item active">
+            $sql = "SELECT * FROM `searchpage_banners` WHERE city_id='$city_id'";
+            $db->sql($sql);
+            $result = $db->getResult();
+            $num = $db->numRows($result);
+            for ($x = 0; $x < $num; $x++) {
+        ?>
+          <div class="carousel-item <?php echo $x == 0 ? "active" : '' ?>">
             <div class="banner-overlay"></div>
-            <img src="<?php echo "admin/" .$result[0]['image']; ?>" class="d-block w-100" alt="...">
+            <img src="<?php echo 'admin/'.$result[$x]['image'];?>" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-              <h5><?php echo $result[0]['title']; ?></h5>
-              <p><?php echo $result[0]['description']; ?></p>
+              <h5><?php echo $result[$x]['title'];?></h5>
+              <p><?php echo $result[$x]['description'];?> </p>
             </div>
           </div>
-          <?php
-                $sql = "SELECT * FROM `searchpage_banners` WHERE city_id='$city_id'";
-                $db->sql($sql);
-                $result = $db->getResult();
-                foreach ($result as $value) {
-            ?>
-          <div class="carousel-item">
-            <div class="banner-overlay"></div>
-            <img src="<?php echo "admin/" .$value['image']; ?>" class="d-block w-100" alt="...">
-            <div class="carousel-caption d-none d-md-block">
-              <h5><?php echo $value['title']; ?></h5>
-              <p><?php echo $value['description']; ?></p>
-            </div>
-          </div>
-          <?php } ?>
+          <?php }?>
         </div>
         <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
