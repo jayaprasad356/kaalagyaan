@@ -16,14 +16,16 @@
     // destroy previous session timeout and create new one
     unset($_SESSION['timeout']);
     $_SESSION['timeout'] = $currentTime + $expired;
+    $_SESSION['menu'] = '1';
+    include "header.php";
+    
 	
 	
 	
 ?>
-<?php include "header.php";?>
 <html>
 <head>
-<title>Cities | - Dashboard</title>
+<title> <?php echo $_SESSION['menu'];?> Cities | - Dashboard</title>
 </head>
 </body>
         <?php include('public/cities-table.php'); ?>

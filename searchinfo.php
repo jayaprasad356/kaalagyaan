@@ -14,17 +14,10 @@ $db->sql($sql_query);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if($num>=1){
-    if($res[0]['pincode']==$city){
-        $city_id = $res[0]['id'];
+    $city_id = $res[0]['id'];
     $_SESSION['city_id'] = $city_id;
     header("location: searchpage.php");
-    }
-    if($res[0]['name']==$city){
-        $city_id = $res[0]['id'];
-        $_SESSION['city_id'] = $city_id;
-        header("location: searchpage.php");
-    }
 }else{
-    echo("City Not Found");
+    echo '<script>alert("Data Not Found");window.location = "index.php";</script>';
 }
 ?>

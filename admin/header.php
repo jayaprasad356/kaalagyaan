@@ -2,11 +2,11 @@
 $db = new Database();
 $db->connect();
 $db->sql("SET NAMES 'utf8'");
-
 include('includes/variables.php');
 include_once('includes/custom-functions.php');
 include_once('includes/functions.php');
 $fn = new custom_functions;
+
 
 ?>
 
@@ -102,11 +102,11 @@ $fn = new custom_functions;
 						<a href="#" class="logo">
 							<img src="img/logo.svg" alt="Uni Pro Admin">
 						</a>
-						<a class="nav-link" id="home-tab" data-bs-toggle="tab" href="#tab-home" role="tab" aria-controls="tab-home" aria-selected="true">
+						<a class="nav-link" id="home-tab" href="home.php">
 							<i class="icon-home2"></i>
 							<span class="nav-link-text">Dashboards</span>
 						</a>
-						<a class="nav-link " id="product-tab" data-bs-toggle="tab" href="#tab-product" role="tab" aria-controls="tab-product" aria-selected="false">
+						<a class="nav-link " id="product-tab" href="cities.php">
 							<i class="icon-layers2"></i>
 							<span class="nav-link-text">Cities</span>
 						</a>
@@ -118,7 +118,7 @@ $fn = new custom_functions;
 					<div class="tab-content">
 								
 						<!-- Chat tab -->
-						<div class="tab-pane fade show active"  role="tabpanel" aria-labelledby="home-tab">
+						<div class="tab-pane fade show <?php echo $_SESSION['menu'] == '0' ? "active" : '' ?>"  role="tabpanel" aria-labelledby="home-tab">
 
 							<!-- Tab content header start -->
 							<div class="tab-pane-header">
@@ -159,7 +159,7 @@ $fn = new custom_functions;
 						</div>
 
 						<!-- Pages tab -->
-						<div class="tab-pane fade show" id="tab-product" role="tabpanel" aria-labelledby="product-tab">
+						<div class="tab-pane fade show <?php echo $_SESSION['menu'] == '1' ? "active" : '' ?>" id="tab-product" role="tabpanel" aria-labelledby="product-tab">
 							
 							<!-- Tab content header start -->
 							<div class="tab-pane-header">

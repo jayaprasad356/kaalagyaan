@@ -20,6 +20,7 @@ if ($currentTime > $_SESSION['timeout']) {
 unset($_SESSION['timeout']);
 $_SESSION['timeout'] = $currentTime + $expired;
 $function = new custom_functions;
+$_SESSION['menu'] = '0';
 include "header.php";
 ?>
 <html>
