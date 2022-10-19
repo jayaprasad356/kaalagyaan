@@ -285,30 +285,32 @@ $city_id = $_SESSION['city_id'];
                 <div class="heading_s2">
                 	<h4>About</h4>
                 </div>
+            	<div class="blog_article blog_grid_module">
                 <?php
-                    $sql = "SELECT *,categories.name AS name FROM `about`,`categories` WHERE about.category_id=categories.id AND about.city_id=$city_id";
+                    $sql = "SELECT * FROM `categories`,`about` WHERE about.category_id=categories.id AND city_id=$city_id";
                     $db->sql($sql);
                     $res = $db->getResult();
+                    foreach($res as $value){
                 ?>
-            	<div class="blog_article blog_grid_module">
                 	<div class="blog_post">
                         <div class="blog_img">
                             <a href="#">
-                            	<img src="<?php echo "admin/" .$res[0]['image']; ?>" alt="blog_img1">
+                            	<img src="<?php echo "admin/" .$value['image']; ?>" alt="blog_img1">
                             </a>
                         </div>
                         <div class="blog_content">
                         	<div class="blog_text">
                         		<div class="blog_tags">
-                                    <a class="blog_tags_cat bg_blue" href="#"><?php echo $res[0]['name']; ?></a>
+                                    <a class="blog_tags_cat bg_blue" href="#"><?php echo $value['name']; ?></a>
                                 </div>
-                        		<h5 class="blog_heading"><a href="#"><?php echo $res[0]['title']; ?></a></h5>
+                        		<h5 class="blog_heading"><a href="#"><?php echo $value['title']; ?></a></h5>
                                
-                        		<p><?php echo $res[0]['description']; ?> </p>
+                        		<p><?php echo $value['description']; ?> </p>
                         	</div>
                         </div>
                     </div>
                 </div>
+                <?php } ?>
                 <div id="accordion" class="kal">
                 <?php
                             $sql = "SELECT DISTINCT name FROM `searchpage_accordians`,`categories` WHERE searchpage_accordians.category_id=categories.id AND city_id='$city_id' ORDER BY name";
@@ -330,11 +332,12 @@ $city_id = $_SESSION['city_id'];
                                 $sql = "SELECT * FROM `searchpage_accordians` WHERE city_id='$city_id'";
                                 $db->sql($sql);
                                 $result = $db->getResult();
+                                $category_id =$res[0]['id'];
                             ?>
                             <p><?php echo $result[0]['description']; ?></p>
                             <div class="row">
                                 <?php
-                                    $sql = "SELECT * FROM `searchpage_accordians` WHERE city_id='$city_id'";
+                                    $sql = "SELECT * FROM `searchpage_accordians` WHERE city_id='$city_id' AND category_id='$category_id'";
                                     $db->sql($sql);
                                     $result = $db->getResult();
                                     foreach($result as $value){
