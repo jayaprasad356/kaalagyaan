@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 18, 2022 at 12:55 PM
+-- Generation Time: Oct 20, 2022 at 09:10 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kaadmin`
+-- Database: `kaalagyaan`
 --
 
 -- --------------------------------------------------------
@@ -41,7 +41,7 @@ CREATE TABLE `about` (
 --
 
 INSERT INTO `about` (`id`, `title`, `city_id`, `category_id`, `description`, `image`) VALUES
-(1, 'Hyderabad', 1, 8, '<p>Hyderabad is the capital of southern India&#39;s Telangana state. A major center for the technology industry, it&#39;s home to many upscale restaurants and shops. Its historic sites include Golconda Fort, a former diamond-trading center that was once the Qutb Shahi dynastic capital. The Charminar, a 16th-century mosque whose 4 arches support towering minarets, is an old city landmark near the long-standing Laad Bazaar.</p>\r\n', 'upload/about/6009-2022-10-15.jpg'),
+(1, 'Hyderabad', 1, 8, '<p>Hyderabad is the capital of southern India&#39;s Telangana state. A major center for the technology industry, it&#39;s home to many upscale restaurants and shops. Its historic sites include Golconda Fort, a former diamond-trading center that was once the Qutb Shahi dynastic capital. The Charminar, a 16th-century mosque whose 4 arches support towering minarets, is an old city landmark near the long-standing Laad Bazaar.</p>\n', 'upload/about/6009-2022-10-15.jpg'),
 (2, 'Chennai', 2, 8, '<p>Bengaluru (also called Bangalore) is the capital of India&#39;s southern Karnataka state. The center of India&#39;s high-tech industry, the city is also known for its parks and nightlife. By Cubbon Park, Vidhana Soudha is a Neo-Dravidian legislative building. </p>\r\n', 'upload/about/6935-2022-10-18.jpg');
 
 -- --------------------------------------------------------
@@ -232,11 +232,9 @@ CREATE TABLE `searchpage_accordians` (
 --
 
 INSERT INTO `searchpage_accordians` (`id`, `city_id`, `category_id`, `description`, `area_name`, `image`) VALUES
-(1, 1, 1, '<p>Hyderabad, the capital city of Telangana is a major IT hub. The city has always been famous for its rich history and delicious food. It is also home to some of the most mesmerizing temples like Ratnalayam Temple, Pedamma Temple, Sree Adinatha Jan Temple etc. Those who are in search of peace in the crowded and busy city must pay a visit to one of these best temples in Hyderabad.</p>\r\n', 'Birla Mandir, jubliee hills', 'upload/accordians/8663-2022-10-16.jpg'),
-(2, 2, 1, '<p>Hello this is sample</p>\r\n', 'Peddamma thali temple jubliee hills', 'upload/accordians/3493-2022-10-16.jpg'),
-(3, 2, 1, '<p>test</p>\r\n', 'Statue of Equality shamshabad', 'upload/accordians/3214-2022-10-16.jpg'),
-(4, 2, 1, '<ul>\r\n	<li>Jagannath Temple. Built by the Odiya Community, Jagannath Temple is considered to be the most famous temple in the entire city of Hyderabad. ...</li>\r\n</ul>\r\n', 'Sanghi Temple ORR', 'upload/accordians/9883-2022-10-16.jpg'),
-(5, 1, 4, '<p>Theatre or theater is a collaborative form of performing art that uses live performers, usually actors or actresses, to present the experience of a real or imagined event before a live audience in a specific place, often a stage.</p>\r\n', 'Imax Prasad Cinemas.', 'upload/accordians/9523-2022-10-16.jpg');
+(1, 1, 1, '<p>Temples <strong>typically have a main building and a larger precinct, which may contain many other buildings or may be a dome-shaped structure, much like an igloo</strong>. The word comes from Ancient Rome, where a templum constituted a sacred precinct as defined by a priest, or augur.</p>\r\n', 'Puri Jagannath Temple', 'upload/accordians/5313-2022-10-20.jpg'),
+(2, 1, 3, '<p><strong>Kashi Vishwanath Temple is regarded as one of the most sacred Hindu temples dedicated to Lord Shiva in India</strong>. Located in the heart of Varanasi, the temple ...</p>\r\n', 'Lord Shiva temple', 'upload/accordians/5166-2022-10-20.jpg'),
+(3, 1, 2, '<p><strong>THE Park Hotels</strong>, pioneers of luxury boutique hotels in India, is present in India&#39;s major cities and leisure destinations.</p>\r\n', 'Taj Krishna', 'upload/accordians/8262-2022-10-20.jpeg');
 
 -- --------------------------------------------------------
 
@@ -335,7 +333,7 @@ ALTER TABLE `searchpage_banners`
 -- AUTO_INCREMENT for table `about`
 --
 ALTER TABLE `about`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -383,7 +381,7 @@ ALTER TABLE `searchgallery`
 -- AUTO_INCREMENT for table `searchpage_accordians`
 --
 ALTER TABLE `searchpage_accordians`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `searchpage_banners`

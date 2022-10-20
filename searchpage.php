@@ -313,7 +313,7 @@ $city_id = $_SESSION['city_id'];
                 <?php } ?>
                 <div id="accordion" class="kal">
                 <?php
-                            $sql = "SELECT DISTINCT name FROM `searchpage_accordians`,`categories` WHERE searchpage_accordians.category_id=categories.id AND city_id='$city_id' ORDER BY name";
+                            $sql = "SELECT DISTINCT name,category_id FROM `searchpage_accordians`,`categories` WHERE searchpage_accordians.category_id=categories.id AND city_id='$city_id' ORDER BY name,category_id";
                             $db->sql($sql);
                             $result = $db->getResult();
                             foreach ($result as $value) {
@@ -329,15 +329,14 @@ $city_id = $_SESSION['city_id'];
                       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body">
                             <?php
-                                $sql = "SELECT * FROM `searchpage_accordians` WHERE city_id='$city_id'";
+                                $sql = "SELECT * FROM `searchpage_accordians` WHERE city_id='$city_id' AND category_id='$value[category_id]'";
                                 $db->sql($sql);
                                 $result = $db->getResult();
-                                $category_id =$res[0]['id'];
                             ?>
                             <p><?php echo $result[0]['description']; ?></p>
                             <div class="row">
                                 <?php
-                                    $sql = "SELECT * FROM `searchpage_accordians` WHERE city_id='$city_id' AND category_id='$category_id'";
+                                    $sql = "SELECT * FROM `searchpage_accordians` WHERE city_id='$city_id' AND category_id='$value[category_id]'";
                                     $db->sql($sql);
                                     $result = $db->getResult();
                                     foreach($result as $value){
