@@ -285,13 +285,14 @@ $city_id = $_SESSION['city_id'];
                 <div class="heading_s2">
                 	<h4>About</h4>
                 </div>
-            	<div class="blog_article blog_grid_module">
+            	
                 <?php
                     $sql = "SELECT * FROM `categories`,`about` WHERE about.category_id=categories.id AND city_id=$city_id";
                     $db->sql($sql);
                     $res = $db->getResult();
                     foreach($res as $value){
                 ?>
+                <div class="blog_article blog_grid_module">
                 	<div class="blog_post">
                         <div class="blog_img">
                             <a href="#">
