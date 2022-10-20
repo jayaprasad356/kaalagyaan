@@ -224,9 +224,9 @@ $city_id = $_SESSION['city_id'];
                 <li><a href="javascript:void(0);" class="nav-link search_trigger"><i class="linearicons-magnifier"></i></a>
                     <div class="search_wrap">
                         <span class="close-search"><i class="ion-ios-close-empty"></i></span>
-                        <form>
-                            <input type="text" placeholder="Search" class="form-control" id="search_input">
-                            <a href="searchpage.php" type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></a>
+                        <form id="search_form"   action="searchinfo.php">
+                            <input type="text" name=city class="form-control" id="search_input">
+                            <button  type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></button>
                         </form>
                     </div>
                 </li>
