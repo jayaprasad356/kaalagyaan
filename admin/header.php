@@ -148,6 +148,9 @@ $fn = new custom_functions;
 										<li>
 											<a href="homefeatured-posts.php">Featured Posts</a>
 										</li>
+										<li>
+											<a href="homeadvertisement.php">Advertisement</a>
+										</li>
 									</ul>
 									
 								</div>
@@ -185,6 +188,9 @@ $fn = new custom_functions;
 										</li>
 										<li>
 											<a href="searchpagegallery.php" >Gallery</a>
+										</li>
+										<li>
+											<a href="searchpageadvertisement.php">Advertisement</a>
 										</li>
 									</ul>
 									

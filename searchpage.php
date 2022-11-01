@@ -437,6 +437,23 @@ $city_id = $_SESSION['city_id'];
             </div>
             <?php } ?>
         </div>
+        <div class="row">
+                   <div class="col-lg-12">
+                        <div class="heading_s2">
+                            <h5 class="widget_title">Advertisement</h5>
+                        </div>
+                   </div>
+                    <?php
+                        $sql = "SELECT *  FROM `searchadvertisement`WHERE city_id='$city_id'";
+                        $db->sql($sql);
+                        $result = $db->getResult();
+                        foreach ($result as $value) {
+                        ?>   
+                    	<div class="col-md-4">
+                                <a href="<?php echo $value['link']; ?>"><img src="<?php echo "admin/" .$value['image']; ?>" alt=""></a>                            
+                        </div>
+                        <?php } ?>
+        </div>
     </div>
 </section>
 

@@ -571,7 +571,7 @@ $db->sql("SET NAMES 'utf8'");
                         <div class="blog_post">
                             <div class="blog_img">
                                 <a href="#">
-                                    <img src="<?php echo "admin/" .$value['image']; ?>"alt="blog_img3">
+                                    <img src="<?php echo "admin/" .$value['image']; ?>" alt="blog_img3">
                                 </a>
                             </div>
                             <div class="blog_content">
@@ -598,8 +598,8 @@ $db->sql("SET NAMES 'utf8'");
             <div class="col-lg-4">
             	<div class="sidebar mt-4 pt-2 mt-lg-0 pt-lg-0">
                 	<div class="widget">
-                    	<h5 class="widget_title">Tags</h5>
-                        <div class="tags">
+                    	<h5 class="widget_title">Advertisement</h5>
+                        <!-- <div class="tags">
                         	<a href="#">General</a>
                             <a href="#">Food</a>
                             <a href="#">Health</a>
@@ -611,14 +611,22 @@ $db->sql("SET NAMES 'utf8'");
                             <a href="#">Office</a>
                             <a href="#">Temples</a>
                             <a href="#">Advertisement</a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="widget">
+                    <?php
+                        $sql = "SELECT *  FROM `homeadvertisement`";
+                        $db->sql($sql);
+                        $result = $db->getResult();
+                        foreach ($result as $value) {
+                        ?>   
                     	<div class="text-center">
                             <div class="ads_banner">
-                                <a href="#"><img src="assets/images/ads336X280.jpg" alt=""></a>
+                                <a href="<?php echo $value['link'] ?>"><img src="<?php echo "admin/" .$value['image']; ?>" width=300 alt=""></a>
                             </div>
+                            <br>
                         </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

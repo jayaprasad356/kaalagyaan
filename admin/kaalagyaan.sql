@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 20, 2022 at 09:10 AM
+-- Generation Time: Nov 01, 2022 at 07:44 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -89,6 +89,25 @@ CREATE TABLE `cities` (
 INSERT INTO `cities` (`id`, `name`, `state`, `pincode`) VALUES
 (1, 'Hyderabad', 'Telangana', '877999'),
 (2, 'Bangalore', 'India', '987542');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `homeadvertisement`
+--
+
+CREATE TABLE `homeadvertisement` (
+  `id` int(11) NOT NULL,
+  `link` text DEFAULT NULL,
+  `image` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `homeadvertisement`
+--
+
+INSERT INTO `homeadvertisement` (`id`, `link`, `image`) VALUES
+(1, 'https://www.youtube.com/watch?v=S-akOpICpU8', 'upload/advertisement/1317-2022-11-01.jpg');
 
 -- --------------------------------------------------------
 
@@ -190,6 +209,26 @@ INSERT INTO `hometrending_posts` (`id`, `title`, `category_id`, `description`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `searchadvertisement`
+--
+
+CREATE TABLE `searchadvertisement` (
+  `id` int(11) NOT NULL,
+  `city_id` int(11) DEFAULT NULL,
+  `link` text DEFAULT NULL,
+  `image` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `searchadvertisement`
+--
+
+INSERT INTO `searchadvertisement` (`id`, `city_id`, `link`, `image`) VALUES
+(5, 1, 'https://www.youtube.com/watch?v=px6PisPffk0', 'upload/searchadvertisement/3648-2022-11-01.jpg');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `searchgallery`
 --
 
@@ -284,6 +323,12 @@ ALTER TABLE `cities`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `homeadvertisement`
+--
+ALTER TABLE `homeadvertisement`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `homebanners`
 --
 ALTER TABLE `homebanners`
@@ -305,6 +350,12 @@ ALTER TABLE `homegallery`
 -- Indexes for table `hometrending_posts`
 --
 ALTER TABLE `hometrending_posts`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `searchadvertisement`
+--
+ALTER TABLE `searchadvertisement`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -348,6 +399,12 @@ ALTER TABLE `cities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `homeadvertisement`
+--
+ALTER TABLE `homeadvertisement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `homebanners`
 --
 ALTER TABLE `homebanners`
@@ -372,10 +429,16 @@ ALTER TABLE `hometrending_posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `searchadvertisement`
+--
+ALTER TABLE `searchadvertisement`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `searchgallery`
 --
 ALTER TABLE `searchgallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `searchpage_accordians`
